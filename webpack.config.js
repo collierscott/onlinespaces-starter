@@ -38,7 +38,6 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
-    .enablePostCssLoader()
 
     .configureBabel(function(babelConfig) {
     //     // add additional presets
@@ -57,6 +56,12 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
+
+    .enablePostCssLoader((options) => {
+        options.config = {
+            path: 'postcss.config.js'
+        };
+    })
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
