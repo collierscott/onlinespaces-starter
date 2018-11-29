@@ -17,6 +17,14 @@ security:
         main:
             anonymous: true
             user_checker: App\Security\UserChecker
+            form_login:
+                check_path: form_login
+                login_path: form_login
+                default_target_path: home_page
+                use_referer: true
+            logout:
+                path: form_logout
+                
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator

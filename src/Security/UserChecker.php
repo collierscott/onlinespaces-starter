@@ -4,7 +4,6 @@ namespace App\Security;
 
 use App\Entity\User;
 use App\Exception\AccountDeletedException;
-use App\Exception\AccountDisabbledException;
 use App\Exception\AccountDisabledException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;

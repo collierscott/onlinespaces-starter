@@ -23,4 +23,11 @@ class SecurityController extends AbstractController
             ['last_username' => $lastUsername,
             'error' => $error]);
     }
+
+    /**
+     * @Route("/logout", name="form_logout")
+     */
+    public function logout() {
+        // Should never really be called
+    }
 }
