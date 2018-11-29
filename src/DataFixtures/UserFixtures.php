@@ -27,6 +27,7 @@ class UserFixtures extends Fixture
         $user->setIsConfirmed(true);
         $user->setIsEnabled(true);
         $user->setRoles(['ROLE_USER']);
+        $user->agreeToTerms();
 
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,

@@ -3,11 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="users")
+ *
+ * @UniqueEntity(
+ *     fields={"email", "username"},
+ *     message="This email is already registered."
+ * )
  */
 class User implements UserInterface
 {
@@ -20,6 +27,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="Please enter an username")
      */
     private $username;
 
@@ -36,16 +44,18 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Please enter an email")
+     * @Assert\Email()
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $firstName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastName;
 
@@ -63,6 +73,11 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isDeleted;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $agreedTermsAt;
 
     public function __construct()
     {
@@ -161,7 +176,7 @@ class User implements UserInterface
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName): self
+    public function setFirstName(?string $firstName): self
     {
         $this->firstName = $firstName;
 
@@ -173,7 +188,7 @@ class User implements UserInterface
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName): self
+    public function setLastName(?string $lastName): self
     {
         $this->lastName = $lastName;
 
@@ -214,5 +229,25 @@ class User implements UserInterface
         $this->isDeleted = $isDeleted;
 
         return $this;
+    }
+
+    public function getAgreedTermsAt(): ?\DateTimeInterface
+    {
+        return $this->agreedTermsAt;
+    }
+
+    public function setAgreedTermsAt(\DateTimeInterface $agreedTermsAt): self
+    {
+        $this->agreedTermsAt = $agreedTermsAt;
+
+        return $this;
+    }
+
+    public function agreeToTerms()
+    {
+        try {
+            $this->agreedTermsAt = new \DateTime();
+        } catch (\Exception $e) {
+        }
     }
 }
