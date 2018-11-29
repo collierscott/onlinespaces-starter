@@ -40,7 +40,7 @@ Encore
     .enableVersioning(Encore.isProduction())
     .enablePostCssLoader()
 
-    // .configureBabel(function(babelConfig) {
+    .configureBabel(function(babelConfig) {
     //     // add additional presets
     //     // babelConfig.presets.push('@babel/preset-flow');
     //
@@ -53,10 +53,10 @@ Encore
     //
     //     // or completely control the exclude
     //     // exclude: /bower_components/
-    // })
+    })
 
     // enables Sass/SCSS support
-    .enableSassLoader();
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -64,12 +64,20 @@ Encore
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
 
-    // .copyFiles({
-    //     from: './assets/images',
-    //         // optional target path, relative to the output dir
-    //         //to: 'images/[path][name].[ext]',
-    //         // only copy files matching this pattern
-    //        //pattern: /\.(png|jpg|jpeg)$/
-    // });
+    .copyFiles({
+        from: './assets/images',
+            // optional target path, relative to the output dir
+            to: 'images/[path][name].[ext]',
+            // only copy files matching this pattern
+           pattern: /\.(png|jpg|jpeg|svg)$/
+    })
+
+    .copyFiles({
+        from: './assets/images',
+        // optional target path, relative to the output dir
+        to: '../[path][name].[ext]',
+        // only copy files matching this pattern
+        pattern: /\.(ico)$/
+    });
 
 module.exports = Encore.getWebpackConfig();
