@@ -5,6 +5,7 @@ namespace App\Security;
 use App\Entity\User;
 use App\Exception\AccountDeletedException;
 use App\Exception\AccountDisabbledException;
+use App\Exception\AccountDisabledException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -33,7 +34,7 @@ class UserChecker implements UserCheckerInterface
      * Checks the user account after authentication.
      *
      * @param UserInterface $user
-     * @throws AccountDisabbledException
+     * @throws AccountDisabledException
      */
     public function checkPostAuth(UserInterface $user)
     {
@@ -42,8 +43,8 @@ class UserChecker implements UserCheckerInterface
         }
 
         // user account is expired, the user may be notified
-        if ($user->getIsEnabled()) {
-            throw new AccountDisabbledException();
+        if (!$user->getIsEnabled()) {
+            throw new AccountDisabledException();
         }
     }
 }
