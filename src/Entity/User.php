@@ -79,11 +79,18 @@ class User implements UserInterface
      */
     private $agreedTermsAt;
 
+    /**
+     * @var string $confirmationToken
+     * @ORM\Column(type="string", name="confirmation_token", length=40, nullable=true)
+     */
+    private $confirmationToken;
+
     public function __construct()
     {
         $this->isEnabled = false;
         $this->isConfirmed = false;
         $this->isDeleted = false;
+        $this->confirmationToken = null;
     }
 
     public function getId(): ?int
@@ -249,5 +256,21 @@ class User implements UserInterface
             $this->agreedTermsAt = new \DateTime();
         } catch (\Exception $e) {
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getConfirmationToken(): string
+    {
+        return $this->confirmationToken;
+    }
+
+    /**
+     * @param string $confirmationToken
+     */
+    public function setConfirmationToken(?string $confirmationToken): void
+    {
+        $this->confirmationToken = $confirmationToken;
     }
 }
