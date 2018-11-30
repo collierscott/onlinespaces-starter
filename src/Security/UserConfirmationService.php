@@ -5,6 +5,7 @@ namespace App\Security;
 use App\Exception\InvalidConfirmationTokenException;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 
 class UserConfirmationService
 {
@@ -12,12 +13,17 @@ class UserConfirmationService
 
     private $manager;
 
+    private $logger;
+
     public function __construct(
         UserRepository $userRepository,
-        EntityManagerInterface $manager)
+        EntityManagerInterface $manager,
+        LoggerInterface $logger
+    )
     {
         $this->userRepository = $userRepository;
         $this->manager = $manager;
+        $this->logger = $logger;
     }
 
     /**
@@ -31,6 +37,7 @@ class UserConfirmationService
         );
 
         if(!$user) {
+            $this->logger->debug('User by confirmation token not found.');
             throw new InvalidConfirmationTokenException();
         }
 
