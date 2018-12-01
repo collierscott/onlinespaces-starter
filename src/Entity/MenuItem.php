@@ -21,7 +21,7 @@ class MenuItem implements NodeInterface
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Menu", inversedBy="menuItems")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Menu", inversedBy="children")
      * @ORM\JoinColumn(nullable=false)
      */
     private $menu;
@@ -138,6 +138,18 @@ class MenuItem implements NodeInterface
         return $this;
     }
 
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(string $link): self
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
     public function getLinkType(): ?string
     {
         return $this->linkType;
@@ -148,11 +160,6 @@ class MenuItem implements NodeInterface
         $this->linkType = $linkType;
 
         return $this;
-    }
-
-    public function getLink(): ?string
-    {
-        return $this->link;
     }
 
     public function getIsPublished(): ?bool

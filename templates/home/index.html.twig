@@ -5,6 +5,7 @@
 {% block body %}
 <div class="container">
     <h1>Welcome to ...! ✅</h1>
+    {{ knp_menu_render('main-menu', { 'currentClass': 'active', 'template': 'menu/top_menu.html.twig' }) }}
     <ul>
         <li><a href="{{ path('form_register') }}">Register</a> </li>
         <li><a href="{{ path('form_login') }}">Login</a></li>
