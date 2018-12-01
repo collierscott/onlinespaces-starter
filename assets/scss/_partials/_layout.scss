@@ -1,0 +1,40 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+.page {
+  background-color: #fff;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.main-content {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  &.fluid {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.top-content {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  &.fluid {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.main-wrapper {
+  flex-grow: 1;
+}
+
+header, .main-wrapper, footer {
+  flex-shrink: 0;
+}

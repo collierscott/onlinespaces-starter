@@ -1,0 +1,124 @@
+// Place global config here like Bootstrap's _variables.scss.
+// This kind of config is often required prior to importing any libraries (ie Bootstrap Sass), and
+// usually does not produce any markup, just variables and maps
+//
+
+// Colors
+$c-blue: #011e41;
+$c-blue-light: #0f4a78;
+$c-gold: #ffb81d;
+$c-gold-2: #837600;
+$c-red: #ab192d;
+$c-purple: #5534a3;
+
+$c-white: #ffffff;
+$c-black: #000000;
+$c-off-white: #f5f7fb;
+
+//Background and foreground
+$c-grey-light: #f6f6f6;
+$c-grey-med-light: #dddddd;
+$c-grey-med: #adadad;
+$c-grey-med-dark: #666666;
+$c-grey-dark-light: #57504a;
+$c-grey-dark: #202020;
+
+//Highlights
+$c-info: #d9edf7;
+$c-info--strong: #1aafd0;
+$c-success: #dff0d8;
+$c-success--strong: #3be8b0;
+$c-danger: #f2dede;
+$c-danger--strong: #fc636b;
+$c-stress: #fff6d5;
+$c-important: #ffefb4;
+
+$c-page:        $c-white;           // to match the page background, default is white
+$c-body:        $c-grey-dark-light; // font color
+
+//
+// Gray scale and brand colors for use across Bootstrap.
+
+// Start with assigning color names to specific hex values.
+$white:  $c-white;
+$off-white: $c-off-white;
+$black:  #000;
+$red:    #d9534f;
+$orange: #f0ad4e;
+$yellow: #ffd500;
+$green:  #5cb85c;
+$blue:   #0275d8;
+$teal:   #5bc0de;
+$pink:   #ff5b77;
+$purple: #613d7c;
+
+// Custom
+$green--darker:  #34bf49;
+
+// Create gray scale
+$gray-darkest:              #111111;
+$gray-darker:               #222222;
+$gray-dark:                 #292b2c;
+$gray:                      #464a4c;
+$gray-light:                #636c72;
+$gray-lighter:              #eceeef;
+$gray-lightest:             #f7f7f9;
+
+// Reassign color vars to semantic color scheme
+$brand-primary:             $blue;
+$brand-secondary:           $green--darker;
+$brand-success:             $green;
+$brand-info:                $teal;
+$brand-warning:             $orange;
+$brand-danger:              $red;
+$brand-inverse:             $gray-dark;
+
+$body-bg:       $white;
+$body-color:    $gray-dark;
+$inverse-bg:    $gray-dark;
+$inverse-color: $gray-lighter;
+
+$link-color:            $brand-primary;
+$link-decoration:       none;
+$link-hover-color:      darken($link-color, 15%);
+$link-hover-decoration: underline;
+
+$social-colors: (
+        "facebook": #3b5998,
+        "twitter": #1da1f2,
+        "google": #dc4e41,
+        "youtube": #f00,
+        "vimeo": #1ab7ea,
+        "dribbble": #ea4c89,
+        "github": #181717,
+        "instagram": #e4405f,
+        "pinterest": #bd081c,
+        "vk": #6383a8,
+        "rss": #ffa500,
+        "flickr": #0063dc,
+        "bitbucket": #0052cc,
+        "tumblr": #2C4762,
+);
+
+// Social media
+$facebook:                  map-get($social-colors, "facebook");
+$facebook-hover:            darken($facebook, 15%);
+$twitter:                   map-get($social-colors, "twitter");
+$twitter-hover:             darken($twitter, 15%);
+$google:                    map-get($social-colors, "google");
+$google-hover:              darken($google, 15%);
+$pinterest:                 map-get($social-colors, "pinterest");
+$pinterest-hover:           darken($pinterest, 15%);
+$tumblr:                    map-get($social-colors, "tumblr");;
+$tumblr-hover:              darken($tumblr, 15%);
+$instagram:                 map-get($social-colors, "instagram");;
+$instagram-hover:           darken($instagram, 15%);
+// End Bootstrap
+
+//Links
+$c-button: #0071cf;
+$c-button--hover: #0798eb;
+
+$text-muted-dark: $c-grey-med-dark;
+
+$footer-bg: $white;
