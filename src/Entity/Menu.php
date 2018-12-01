@@ -40,7 +40,7 @@ class Menu implements NodeInterface
     private $isPublished;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MenuItem", mappedBy="menu")
+     * @ORM\OneToMany(targetEntity="App\Entity\MenuItem", mappedBy="menu", fetch="EAGER")
      */
     private $children;
 
