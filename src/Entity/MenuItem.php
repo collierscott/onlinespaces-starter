@@ -5,12 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\Menu\NodeInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MenuItemRepository")
  * @ORM\Table(name="menu_items")
  */
-class MenuItem
+class MenuItem implements NodeInterface
 {
     /**
      * @ORM\Id()
@@ -33,7 +34,7 @@ class MenuItem
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -49,6 +50,12 @@ class MenuItem
      * @ORM\Column(type="boolean")
      */
     private $isPublished;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    private $displayChildren;
 
     /**
      * @ORM\Column(type="integer")
@@ -80,6 +87,7 @@ class MenuItem
         $this->isHome = false;
         $this->sortOrder = 0;
         $this->linkType = 'route';
+        $this->displayChildren = true;
     }
 
     public function getId(): ?int
@@ -111,14 +119,21 @@ class MenuItem
         return $this;
     }
 
-    public function getTitle(): ?string
+    /**
+     * Get the name of the node
+     *
+     * Each child of a node must have a unique name
+     *
+     * @return string
+     */
+    public function getName(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): self
+    public function setName(string $name): self
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
@@ -140,13 +155,6 @@ class MenuItem
         return $this->link;
     }
 
-    public function setPath(string $link): self
-    {
-        $this->link = $link;
-
-        return $this;
-    }
-
     public function getIsPublished(): ?bool
     {
         return $this->isPublished;
@@ -157,6 +165,27 @@ class MenuItem
         $this->isPublished = $isPublished;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDisplayChildren(): bool
+    {
+        return $this->getIsDisplayedChildren();
+    }
+
+    public function getIsDisplayedChildren(): ?bool
+    {
+        return $this->displayChildren;
+    }
+
+    /**
+     * @param bool $displayChildren
+     */
+    public function setDisplayChildren(bool $displayChildren): void
+    {
+        $this->displayChildren = $displayChildren;
     }
 
     public function getSortOrder(): ?int
@@ -224,5 +253,23 @@ class MenuItem
         }
 
         return $this;
+    }
+
+    /**
+     * Get the options for the factory to create the item for this node
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return [
+            'link-type' => $this->getLinkType(),
+            'published' => $this->getIsPublished(),
+            'name' => $this->getName(),
+            'home' => $this->getIsHome(),
+            'alias' => $this->getAlias(),
+            'sort-order' => $this->getSortOrder(),
+            'display-children' => $this->getIsDisplayedChildren(),
+        ];
     }
 }
