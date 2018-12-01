@@ -37,7 +37,7 @@ class UserConfirmationService
         );
 
         if(!$user) {
-            $this->logger->debug('User by confirmation token not found.');
+            $this->logger->debug('The confirmation token not found.');
             throw new InvalidConfirmationTokenException();
         }
 

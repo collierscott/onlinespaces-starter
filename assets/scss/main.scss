@@ -1,0 +1,31 @@
+@import './_partials/variables';
+@import './_partials/colors';
+@import './functions';
+@import '~bootstrap/scss/bootstrap';
+//
+//@import './assets/scss/global';
+//@import './assets/scss/functions';
+$fa-font-path:   "~@fortawesome/fontawesome-pro/webfonts";
+
+@import "~@fortawesome/fontawesome-pro/scss/fontawesome";
+@import "~@fortawesome/fontawesome-pro/scss/brands";
+@import "~@fortawesome/fontawesome-pro/scss/light";
+@import "~@fortawesome/fontawesome-pro/scss/regular";
+@import "~@fortawesome/fontawesome-pro/scss/solid";
+
+/*@import './assets/scss/text';
+
+@import './assets/scss/partials/header';*/
+
+// Styles
+@import "./_partials/layout";
+@import "./_partials/avatars";
+@import "./_partials/breadcrumbs";
+@import "./_partials/buttons";
+@import "./_partials/cards";
+@import "./_partials/dropdown";
+@import "./_partials/header";
+@import "./_partials/map";
+@import "./_partials/navigation";
+@import "./_partials/table";
+@import "./_partials/footer";

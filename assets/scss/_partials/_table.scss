@@ -1,0 +1,12 @@
+.hidden-column {
+  display: none !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.table:not(.unstackable) tbody.hidden-column,
+  .ui.table:not(.unstackable) tr.hidden-column,
+  .ui.table:not(.unstackable) tr>td.hidden-column,
+  .ui.table:not(.unstackable) tr>th.hidden-column {
+    display: none !important;
+  }
+}
