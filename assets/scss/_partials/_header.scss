@@ -1,0 +1,31 @@
+.header {
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(0, 40, 100, 0.12);
+}
+
+.header-logo {
+  color: inherit;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  white-space: nowrap;
+  font-weight: 600;
+  padding: 0;
+  transition: .3s opacity;
+  line-height: 2rem;
+}
+
+.header-logo-img {
+  height: 2.5rem;
+  line-height: 2.5rem;
+  vertical-align: bottom;
+  margin-right: .5rem;
+  width: auto;
+}
+
+.header-toggler {
+  width: 2rem;
+  height: 2rem;
+  position: relative;
+  color: #9aa0ac;
+  margin-right: -15px;
+}
