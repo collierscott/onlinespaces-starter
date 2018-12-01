@@ -81,7 +81,7 @@ class User implements UserInterface
 
     /**
      * @var string $confirmationToken
-     * @ORM\Column(type="string", name="confirmation_token", length=40, nullable=true)
+     * @ORM\Column(type="string", name="confirmation_token", length=80, nullable=true)
      */
     private $confirmationToken;
 
@@ -272,5 +272,10 @@ class User implements UserInterface
     public function setConfirmationToken(?string $confirmationToken): void
     {
         $this->confirmationToken = $confirmationToken;
+    }
+
+    public function __toString()
+    {
+        return $this->getUsername();
     }
 }
