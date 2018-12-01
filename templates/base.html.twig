@@ -1,22 +1,111 @@
 <!DOCTYPE html>
-<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" dir="ltr">
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" dir="ltr">
+    <!--
+        Regions:
+            header: Items for the top header
+            top_navigation: Items for the top menu
+            featured_top: Items for the featured top
+            messages: Items that are messages
+            help: Items that are helpful
+            breadcrumb: Items in the breadcrumb
+            body:
+            featured_bottom:
+            footer:
+    -->
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Welcome{% endblock %}</title>
+        <!-- SEO Info -->
+        <meta name="description" content="Page description"/>
+        <meta name="keywords" content="Keywords" />
+        <meta name="author" content="Author" />
+
+        <link rel="publisher" href="{{ url('home_page') }}"/>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
         {% endblock %}
         {% block javascripts_top %}{% endblock %}
     </head>
-    <body class="page-body">
-        <div class="page">
-            <div class="page-main">
-            {% block body %}{% endblock %}
+    <body>
+        <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <header>
+            {% block header %}{% endblock %}
+            {% block top_navigation %}{% endblock %}
+        </header>
+        <div class="container-fluid">
+            <div class="row flex-xl-nowrap">
+                <div class="col-12">
+                    {% block featured_top %}{% endblock %}
+                </div>
+            </div>
+            <div class="row flex-xl-nowrap">
+                <div class="col-12">
+                    {% block messages %}
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="far fa-times"></i></span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                        {% for message in app.flashes('warning') %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="far fa-times"></i></span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="far fa-times"></i></span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% endblock %}
+                    {% block help %}
+                        {% for message in app.flashes('info') %}
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="far fa-times"></i></span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="row flex-xl-nowrap">
+                <div class="col-12">
+                    {% block breadcrumb %}{% endblock %}
+                    <main role="main" id="content">
+                        {% block body %}{% endblock %}
+                    </main>
+                </div>
+            </div>
+            <div class="row flex-xl-nowrap">
+                <div class="col-12">
+                    {% block featured_bottom %}{% endblock %}
+                </div>
             </div>
         </div>
+        {% block footer%}
+            <footer class="footer">
+                <div class="container-fluid">
+                    <span class="text-muted">&copy; Onlinespaces 2018</span>
+                </div>
+            </footer>
+        {% endblock %}
         {% block javascripts %}
             <script src="{{ asset('build/app.js') }}"></script>
         {% endblock %}
     </body>
 </html>
+

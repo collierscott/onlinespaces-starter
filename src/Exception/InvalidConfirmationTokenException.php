@@ -14,7 +14,7 @@ class InvalidConfirmationTokenException extends \Exception
     public function __construct(string $message = "", int $code = 0, Throwable $previous = null)
     {
         if(empty($message)) {
-            $message = 'The confirmation token is invalid.';
+            $message = 'The confirmation token is invalid or has already been used.';
         }
 
         parent::__construct($message, $code, $previous);
