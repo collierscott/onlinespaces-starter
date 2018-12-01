@@ -3,14 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\Menu\NodeInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MenuRepository")
  * @ORM\Table(name="menus")
  */
-class Menu
+class Menu implements NodeInterface
 {
     /**
      * @ORM\Id()
@@ -42,13 +42,13 @@ class Menu
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\MenuItem", mappedBy="menu")
      */
-    private $menuItems;
+    private $children;
 
     public function __construct()
     {
         $this->menuType = 'user';
         $this->isPublished = true;
-        $this->menuItems = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,33 +105,50 @@ class Menu
     }
 
     /**
-     * @return Collection|MenuItem[]
+     * Get the child nodes implementing NodeInterface
+     *
+     * @return \Traversable
      */
-    public function getMenuItems(): Collection
+    public function getChildren(): \Traversable
     {
-        return $this->menuItems;
+        return $this->children;
     }
 
-    public function addMenuItem(MenuItem $menuItem): self
+    public function addChild(MenuItem $child): self
     {
-        if (!$this->menuItems->contains($menuItem)) {
-            $this->menuItems[] = $menuItem;
-            $menuItem->setMenu($this);
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->setMenu($this);
         }
 
         return $this;
     }
 
-    public function removeMenuItem(MenuItem $menuItem): self
+    public function removeChild(MenuItem $child): self
     {
-        if ($this->menuItems->contains($menuItem)) {
-            $this->menuItems->removeElement($menuItem);
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
             // set the owning side to null (unless already changed)
-            if ($menuItem->getMenu() === $this) {
-                $menuItem->setMenu(null);
+            if ($child->getMenu() === $this) {
+                $child->setMenu(null);
             }
         }
 
         return $this;
+    }
+
+    /**
+     * Get the options for the factory to create the item for this node
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return [
+            'menu-type' => $this->getMenuType(),
+            'published' => $this->getIsPublished(),
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+        ];
     }
 }

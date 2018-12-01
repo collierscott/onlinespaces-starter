@@ -32,3 +32,10 @@ services:
     App\Security\UserConfirmationService:
         arguments:
             $logger: '@monolog.logger.token_confirmation'
+
+    app.menu_provider:
+        class: App\Provider\ApplicationMenuProvider
+        arguments:
+            - '@knp_menu.factory'
+        tags:
+            - { name: knp_menu.provider }
