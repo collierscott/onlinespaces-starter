@@ -3,10 +3,11 @@
 namespace App\Email;
 
 use App\Entity\User;
-use Psr\Log\LoggerInterface;
+use App\Helper\LoggerTrait;
 
 class Mailer
 {
+    use LoggerTrait;
     /**
      * @var \Swift_Mailer
      */
@@ -17,18 +18,13 @@ class Mailer
      */
     private $twig;
 
-    /** @var LoggerInterface  */
-    private $logger;
-
     public function __construct(
         \Swift_Mailer $mailer,
-        \Twig_Environment $twig,
-        LoggerInterface $logger
+        \Twig_Environment $twig
     )
     {
         $this->mailer = $mailer;
         $this->twig = $twig;
-        $this->logger = $logger;
     }
 
     public function sendConfirmationEmail(User $user)
