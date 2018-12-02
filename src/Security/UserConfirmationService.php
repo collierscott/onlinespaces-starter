@@ -3,27 +3,25 @@
 namespace App\Security;
 
 use App\Exception\InvalidConfirmationTokenException;
+use App\Helper\LoggerTrait;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 
 class UserConfirmationService
 {
+    use LoggerTrait;
+
     private $userRepository;
 
     private $manager;
 
-    private $logger;
-
     public function __construct(
         UserRepository $userRepository,
-        EntityManagerInterface $manager,
-        LoggerInterface $logger
+        EntityManagerInterface $manager
     )
     {
         $this->userRepository = $userRepository;
         $this->manager = $manager;
-        $this->logger = $logger;
     }
 
     /**
