@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block top_navigation %}
+    <nav class="navbar navbar-expand-md fixed-top top-nav navbar-light bd-navbar">
+        <a class="navbar-brand" href="{{ path('home_page') }}">
+            <img class="top-logo" src="{{ asset('build/images/onlinespaces__logo--44x44.png') }}"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            {{ knp_menu_render('main-menu') }}
+            <div id="account-navbar" class="mt-2 mt-md-2">
+                <ul class="navbar-nav mr-auto">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('form_login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('form_register') }}">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block breadcrumb %}
+
+{% endblock %}
