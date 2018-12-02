@@ -23,7 +23,7 @@ class AppFixtures extends Fixture
         $item = new MenuItem();
         $item->setName('child-one');
         $item->setMenu($menu);
-        $item->setAlias('child-one');
+        $item->setLabel('Home');
         $item->setLink('home_page');
         $manager->persist($item);
 

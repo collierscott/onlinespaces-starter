@@ -45,7 +45,7 @@ class ApplicationMenuProvider implements MenuProviderInterface
 
         /** @var MenuItem $item */
         foreach ($root->getChildren() as $item) {
-            $menu->addChild($item->getName(), ['route' => $item->getLink()]);
+            $menu->addChild($item->getLabel(), ['route' => $item->getLink()]);
             // TODO Need to get all children and children of children if displaying children
             // TODO Should probably be able to set max depth also
         }
@@ -75,7 +75,6 @@ class ApplicationMenuProvider implements MenuProviderInterface
      */
     private function find($name, $throw)
     {
-
         if (!$name) {
             if ($throw) {
                 throw new \InvalidArgumentException('The menu name may not be empty');

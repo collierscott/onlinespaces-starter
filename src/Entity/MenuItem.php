@@ -27,9 +27,9 @@ class MenuItem implements NodeInterface
     private $menu;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", name="label", length=255, nullable=true)
      */
-    private $alias;
+    private $label;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -107,14 +107,14 @@ class MenuItem implements NodeInterface
         return $this;
     }
 
-    public function getAlias(): ?string
+    public function getLabel(): ?string
     {
-        return $this->alias;
+        return $this->label;
     }
 
-    public function setAlias(?string $alias): self
+    public function setLabel(?string $label): self
     {
-        $this->alias = $alias;
+        $this->label = $label;
 
         return $this;
     }
@@ -274,7 +274,7 @@ class MenuItem implements NodeInterface
             'published' => $this->getIsPublished(),
             'name' => $this->getName(),
             'home' => $this->getIsHome(),
-            'alias' => $this->getAlias(),
+            'label' => $this->getLabel(),
             'sort-order' => $this->getSortOrder(),
             'display-children' => $this->getIsDisplayedChildren(),
         ];
