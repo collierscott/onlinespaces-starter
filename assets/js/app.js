@@ -10,6 +10,6 @@ require('../scss/main.scss');
 require('../css/app.css');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// var $ = require('jquery');
-
+//var $ = require("jquery");
+import $ from 'jquery';
 //console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
