@@ -26,3 +26,5 @@ yarn-error.log
 
 ### /assets
 /public/favicon.ico
+/public/uploads
+/public/vendors

@@ -68,16 +68,18 @@ Encore
     //.enableTypeScriptLoader()
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
 
+        // Images
     .copyFiles({
         from: './assets/images',
-            // optional target path, relative to the output dir
-            to: 'images/[path][name].[ext]',
-            // only copy files matching this pattern
-           pattern: /\.(png|jpg|jpeg|svg)$/
+        // optional target path, relative to the output dir
+        to: 'images/[path][name].[ext]',
+        // only copy files matching this pattern
+        pattern: /\.(png|jpg|jpeg|svg)$/
     })
 
+    // favicon
     .copyFiles({
         from: './assets/images',
         // optional target path, relative to the output dir
