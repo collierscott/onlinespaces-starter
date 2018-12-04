@@ -4,5 +4,12 @@
 {% block body %}
     <div class="container">
         <h1>Add Article</h1>
+        {{ include('admin/article/_form.html.twig', {
+            button_text: 'Create!'
+        }) }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
 {% endblock %}

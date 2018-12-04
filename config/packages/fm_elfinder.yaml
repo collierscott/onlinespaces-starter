@@ -1,5 +1,5 @@
 fm_elfinder:
-    assets_path: /build/vendors/elfinder
+    assets_path: /bundles/elfinder
     instances:
         default:
             locale: '%locale%'
