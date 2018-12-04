@@ -2,6 +2,15 @@
     "behat/transliterator": {
         "version": "v1.2.0"
     },
+    "components/elfinder": {
+        "version": "3.1.1"
+    },
+    "components/jquery": {
+        "version": "3.3.1"
+    },
+    "components/jqueryui": {
+        "version": "1.12.1"
+    },
     "composer/ca-bundle": {
         "version": "1.1.3"
     },
@@ -101,11 +110,29 @@
     "fig/link-util": {
         "version": "1.0.0"
     },
+    "friendsofsymfony/ckeditor-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "8eb1cd0962ded6a6d6e1e5a9b6d3e888f9f94ff6"
+        }
+    },
     "fzaninotto/faker": {
         "version": "v1.8.0"
     },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.36"
+    },
+    "helios-ag/fm-elfinder-bundle": {
+        "version": "7.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "7.0",
+            "ref": "fb9152ee3538f968d9e0f2c763ecbe4ab63eff26"
+        }
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
@@ -115,6 +142,9 @@
     },
     "knplabs/knp-menu-bundle": {
         "version": "v2.2.1"
+    },
+    "kriswallsmith/assetic": {
+        "version": "v1.0.5"
     },
     "monolog/monolog": {
         "version": "1.24.0"
@@ -149,6 +179,9 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
+    "robloach/component-installer": {
+        "version": "0.2.3"
+    },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
         "recipe": {
@@ -175,6 +208,9 @@
             "version": "1.2",
             "ref": "6c1ceb662f8997085f739cd089bfbef67f245983"
         }
+    },
+    "studio-42/elfinder": {
+        "version": "2.1.43"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.1.3"
