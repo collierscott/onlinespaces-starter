@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -26,6 +27,7 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
+     * @Gedmo\Slug(fields={"title"})
      */
     private $slug;
 
@@ -48,6 +50,12 @@ class Article
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $publishedEndAt;
+
+    /**
+     * @var string|null $coverImage
+     * @ORM\Column(name="cover_image", type="string", nullable=true)
+     */
+    private $coverImage;
 
     public function getId(): ?int
     {
@@ -124,5 +132,21 @@ class Article
         $this->publishedEndAt = $publishedEndAt;
 
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCoverImage(): ?string
+    {
+        return $this->coverImage;
+    }
+
+    /**
+     * @param string|null $coverImage
+     */
+    public function setCoverImage(?string $coverImage): void
+    {
+        $this->coverImage = $coverImage;
     }
 }
