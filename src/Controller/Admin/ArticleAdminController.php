@@ -18,7 +18,7 @@ class ArticleAdminController extends AbstractController
      */
     public function new(EntityManagerInterface $manager)
     {
-        return new Response('New article');
+        return $this->render('admin/new.html.twig');
     }
 
     /**
@@ -27,7 +27,7 @@ class ArticleAdminController extends AbstractController
      */
     public function list()
     {
-        return new Response('List articles');
+        return $this->render('admin/list.html.twig');
     }
 
 }
