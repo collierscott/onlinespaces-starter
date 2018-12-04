@@ -12,14 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleAdminController extends AbstractController
 {
     /**
-     * @Route("/admin/article", name="admin_article_list", methods={"GET"})
-     * @return Response
-     */
-    public function list()
-    {
-        return new Response('List articles');
-    }
-    /**
      * @Route("/admin/article/new", name="admin_article_new", methods={"GET", "POST"})
      * @param EntityManagerInterface $manager
      * @return Response
@@ -27,6 +19,15 @@ class ArticleAdminController extends AbstractController
     public function new(EntityManagerInterface $manager)
     {
         return new Response('New article');
+    }
+
+    /**
+     * @Route("/admin/article", name="admin_article_list", methods={"GET"})
+     * @return Response
+     */
+    public function list()
+    {
+        return new Response('List articles');
     }
 
 }
