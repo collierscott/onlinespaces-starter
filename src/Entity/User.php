@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,6 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -85,12 +88,19 @@ class User implements UserInterface
      */
     private $confirmationToken;
 
+    /**
+     * User constructor.
+     *
+     * @throws \Exception
+     */
     public function __construct()
     {
         $this->isEnabled = false;
         $this->isConfirmed = false;
         $this->isDeleted = false;
         $this->confirmationToken = null;
+        $this->createdAt = new \DateTime("now");
+        $this->updatedAt = new \DateTime("now");
     }
 
     public function getId(): ?int
