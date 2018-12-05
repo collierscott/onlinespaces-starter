@@ -1,0 +1,14 @@
+imports:
+  - { resource: ../ckfinder_config.php }
+
+ckfinder:
+  connector:
+    licenseName: worldspaces.com
+    licenseKey: 9CCC-QUEL-D9EG-9E62-A3MB-Q26J-VE9R
+    authenticationClass: AppBundle\CustomCKFinderAuth\CustomCKFinderAuth
+
+    resourceTypes:
+      MyResource:
+        name: MyResource
+        backend: default
+        directory: myResource
