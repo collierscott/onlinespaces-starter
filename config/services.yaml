@@ -37,3 +37,4 @@ services:
             - '@knp_menu.factory'
         tags:
             - { name: knp_menu.provider }
+
