@@ -56,17 +56,31 @@ class ArticleAdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/article/{id}/edit", name="admin_article_edit", methods={"GET", "PUT"})
+     * @Route("/admin/article/{id}/edit", name="admin_article_edit", methods={"GET", "POST"})
      * @param Article $article
-     * @param ArticleRepository $repository
+     * @param Request $request
+     * @param EntityManagerInterface $em
      * @return Response
      */
-    public function edit(Article $article, ArticleRepository $repository)
+    public function edit(Article $article, Request $request, EntityManagerInterface $em)
     {
-        $articles = $repository->findAll();
+        $form = $this->createForm(ArticleFormType::class, $article);
 
-        return $this->render('admin/article/list.html.twig', [
-            'articles' => $articles,
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($article);
+            $em->flush();
+
+            $this->addFlash('success', 'Article has been updated.');
+
+            return $this->redirectToRoute('admin_article_edit', [
+                'id' => $article->getId(),
+            ]);
+        }
+
+        return $this->render('admin/article/edit.html.twig', [
+            'articleForm' => $form->createView()
         ]);
     }
 }
