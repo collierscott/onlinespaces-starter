@@ -4,6 +4,7 @@
 {% block body %}
     <div class="container">
         <h1>Articles</h1>
+        <a href="{{ path('admin_article_new') }}" class="btn btn-primary">Add New Article</a>
         <table class="table">
             <thead>
                 <tr>
@@ -23,7 +24,11 @@
                         <td>{{ article.title }}</td>
                         <td>Author</td>
                         <td>
-                            <span class="fa fa-{{ article.isPublished ? 'check' : 'times' }}"></span>
+                            <a href="{{ path('admin_article_delete', {
+                                id: article.id
+                            }) }}">
+                                <span class="fa fa-{{ article.isPublished ? 'check' : 'times' }}"></span>
+                            </a>
                         </td>
                         <td>
                             <a href="{{ path('admin_article_edit', {
