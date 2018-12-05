@@ -16,6 +16,7 @@ class ArticleAdminController extends AbstractController
     /**
      * @Route("/admin/article/new", name="admin_article_new", methods={"GET", "POST"})
      * @param EntityManagerInterface $manager
+     * @param Request $request
      * @return Response
      */
     public function new(EntityManagerInterface $manager, Request $request)
@@ -42,11 +43,30 @@ class ArticleAdminController extends AbstractController
 
     /**
      * @Route("/admin/article", name="admin_article_list", methods={"GET"})
+     * @param ArticleRepository $repository
      * @return Response
      */
-    public function list()
+    public function list(ArticleRepository $repository)
     {
-        return $this->render('admin/article/list.html.twig');
+        $articles = $repository->findAll();
+
+        return $this->render('admin/article/list.html.twig', [
+            'articles' => $articles,
+        ]);
     }
 
+    /**
+     * @Route("/admin/article/{id}/edit", name="admin_article_edit", methods={"GET", "PUT"})
+     * @param Article $article
+     * @param ArticleRepository $repository
+     * @return Response
+     */
+    public function edit(Article $article, ArticleRepository $repository)
+    {
+        $articles = $repository->findAll();
+
+        return $this->render('admin/article/list.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
 }
