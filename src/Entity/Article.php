@@ -26,8 +26,8 @@ class Article
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=100, unique=true)
      * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(type="string", length=100, unique=true)
      */
     private $slug;
 
@@ -56,6 +56,11 @@ class Article
      * @ORM\Column(name="cover_image", type="string", nullable=true)
      */
     private $coverImage;
+
+    public function __construct()
+    {
+        $this->isPublished = false;
+    }
 
     public function getId(): ?int
     {
