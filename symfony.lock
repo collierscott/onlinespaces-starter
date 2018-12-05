@@ -1,6 +1,12 @@
 {
+    "aws/aws-sdk-php": {
+        "version": "3.80.2"
+    },
     "behat/transliterator": {
         "version": "v1.2.0"
+    },
+    "ckfinder/ckfinder-symfony-bundle": {
+        "version": "3.4.5"
     },
     "components/elfinder": {
         "version": "3.1.1"
@@ -125,6 +131,15 @@
     "gedmo/doctrine-extensions": {
         "version": "v2.4.36"
     },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.3"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.5.1"
+    },
     "helios-ag/fm-elfinder-bundle": {
         "version": "7.0",
         "recipe": {
@@ -146,8 +161,20 @@
     "kriswallsmith/assetic": {
         "version": "v1.0.5"
     },
+    "league/flysystem": {
+        "version": "1.0.49"
+    },
+    "league/flysystem-aws-s3-v3": {
+        "version": "1.0.21"
+    },
+    "league/flysystem-cached-adapter": {
+        "version": "1.0.9"
+    },
     "monolog/monolog": {
         "version": "1.24.0"
+    },
+    "mtdowling/jmespath.php": {
+        "version": "2.4.0"
     },
     "nikic/php-parser": {
         "version": "v4.1.0"
@@ -164,11 +191,17 @@
     "phpdocumentor/type-resolver": {
         "version": "0.4.0"
     },
+    "pimple/pimple": {
+        "version": "v3.2.3"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
     "psr/container": {
         "version": "1.0.0"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
     },
     "psr/link": {
         "version": "1.0.0"
@@ -178,6 +211,9 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "ralouphie/getallheaders": {
+        "version": "2.0.5"
     },
     "robloach/component-installer": {
         "version": "0.2.3"
