@@ -11,7 +11,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("/article{slug}", name="article_show")
+     * @Route("/articles", name="article_list")
+     * @param ArticleRepository $repository
+     * @return Response
+     */
+    public function list(ArticleRepository $repository)
+    {
+        $articles = $repository->findAll();
+        return $this->render('article/list.html.twig', [
+            'articles' => $articles
+        ]);
+    }
+
+    /**
+     * @Route("/articles/{slug}", name="article_show")
      * @param $slug
      * @param ArticleRepository $repository
      * @return Response
@@ -23,6 +36,8 @@ class ArticleController extends AbstractController
         if (!$article) {
             throw $this->createNotFoundException(sprintf('No article for slug "%s"', $slug));
         }
-        return new Response('show article');
+        return $this->render('article/show.html.twig', [
+            'article' => $article
+        ]);
     }
 }
