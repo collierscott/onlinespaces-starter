@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * https://developers.facebook.com/docs/sharing/opengraph/object-properties
  *
- * @ORM\Entity(repositoryClass="App\Repository\SocialFacebookRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\FacebookPageDataRepository")
  * @ORM\Table(name="facebook_data")
  */
-class SocialFacebook
+class FacebookPageData
 {
     /**
      * @ORM\Id()
@@ -23,14 +23,14 @@ class SocialFacebook
      * The URL of the object, which acts as the canonical URL. Usually the same URL as the page where
      * property tags are placed.
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $url;
 
     /**
      * The title, headline or name of the object. Ideal is about 5 words.
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $title;
 
@@ -38,7 +38,7 @@ class SocialFacebook
      * A short description or summary of the object.
      * 80 characters is ideal.
      *
-     * @ORM\Column(type="string", length=155)
+     * @ORM\Column(type="string", length=155, nullable=true)
      */
     private $description;
 
@@ -100,6 +100,11 @@ class SocialFacebook
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    public function __construct()
+    {
+        $this->local = 'en_US';
+    }
 
     public function getId(): ?int
     {
