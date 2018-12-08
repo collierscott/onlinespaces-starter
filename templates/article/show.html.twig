@@ -1,0 +1,9 @@
+{% extends 'layouts/full_page_fluid.html.twig' %}
+{% block title %}Articles{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ article.title }}</h1>
+        {{ article.content | raw }}
+    </div>
+{% endblock %}
