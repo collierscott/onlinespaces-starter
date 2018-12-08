@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
+use App\Entity\Abstracts\AuthoredEntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  */
-class Article
+class Article implements AuthoredEntityInterface
 {
     use TimestampableEntity;
 
@@ -56,6 +58,18 @@ class Article
      * @ORM\Column(name="cover_image", type="string", nullable=true)
      */
     private $coverImage;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 
     public function __construct()
     {
@@ -153,5 +167,29 @@ class Article
     public function setCoverImage(?string $coverImage): void
     {
         $this->coverImage = $coverImage;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?UserInterface $author): AuthoredEntityInterface
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }

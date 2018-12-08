@@ -21,7 +21,7 @@
                     <td>
                         <a href="{{path('article_show', {'slug': article.slug})  }}">{{ article.title }}</a>
                     </td>
-                    <td>Author</td>
+                    <td>{{ article.author.username }}</td>
                 </tr>
             {% endfor %}
             </tbody>
