@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -89,6 +91,11 @@ class User implements UserInterface
     private $confirmationToken;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author")
+     */
+    private $articles;
+
+    /**
      * User constructor.
      *
      * @throws \Exception
@@ -101,6 +108,8 @@ class User implements UserInterface
         $this->confirmationToken = null;
         $this->createdAt = new \DateTime("now");
         $this->updatedAt = new \DateTime("now");
+        $this->articles = new ArrayCollection();
+        $this->roles = ["ROLE_USER"];
     }
 
     public function getId(): ?int
@@ -287,5 +296,36 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->getUsername();
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getAuthor() === $this) {
+                $article->setAuthor(null);
+            }
+        }
+
+        return $this;
     }
 }
