@@ -1,0 +1,12 @@
+{{ form_start(articleForm) }}
+    {{ form_row(articleForm.title, {
+        label: 'Article title'
+    }) }}
+    {{ form_row(articleForm.content) }}
+    {% if articleForm.publishedAt is defined %}
+        {{ form_row(articleForm.publishedAt) }}
+    {% endif %}
+
+    <a href="{{ path('admin_article_list') }}" type="button" class="btn btn-danger">Cancel</a>
+    <button type="submit" class="btn btn-primary">{{ button_text }}</button>
+{{ form_end(articleForm) }}

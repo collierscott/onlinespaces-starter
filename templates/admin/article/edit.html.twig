@@ -1,0 +1,16 @@
+{% extends 'layouts/full_page_fluid.html.twig' %}
+{% block title %}Add Article{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Edit Article</h1>
+        {{ include('admin/article/_form.html.twig', {
+            button_text: 'Update'
+        }) }}
+    </div>
+    {#{% include "@CKSourceCKFinder/setup.html.twig" %}#}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
