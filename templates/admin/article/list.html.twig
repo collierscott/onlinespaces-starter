@@ -22,7 +22,7 @@
                 {% for article in articles %}
                     <tr>
                         <td>{{ article.title }}</td>
-                        <td>Author</td>
+                        <td>{{ article.author.username }}</td>
                         <td>
                             <a href="{{ path('admin_article_delete', {
                                 id: article.id
