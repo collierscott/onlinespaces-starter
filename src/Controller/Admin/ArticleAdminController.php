@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ArticleAdminController extends AbstractController
 {
     /**
-     * @Route("/admin/article/new", name="admin_article_new", methods={"GET", "POST"})
+     * @Route("/admin/articles/new", name="admin_article_new", methods={"GET", "POST"})
      * @param EntityManagerInterface $manager
      * @param Request $request
      * @return Response
@@ -43,7 +43,7 @@ class ArticleAdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/article", name="admin_article_list", methods={"GET"})
+     * @Route("/admin/articles", name="admin_article_list", methods={"GET"})
      * @param ArticleRepository $repository
      * @return Response
      */
@@ -57,10 +57,10 @@ class ArticleAdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/article/{id}/edit", name="admin_article_edit", methods={"GET", "POST"})
+     * @Route("/admin/articles/{id}/edit", name="admin_article_edit", methods={"GET", "POST"})
      * @param Article $article
      * @param Request $request
-     * @param EntityManagerInterface $em
+     * @param EntityManagerInterface $manager
      * @return Response
      */
     public function edit(Article $article, Request $request, EntityManagerInterface $manager)
@@ -86,7 +86,7 @@ class ArticleAdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/article/{id}/delete", name="admin_article_delete", methods={"GET"})
+     * @Route("/admin/articles/{id}/delete", name="admin_article_delete", methods={"GET"})
      *
      * @param Article $article
      * @param EntityManagerInterface $manager

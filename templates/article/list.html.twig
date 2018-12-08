@@ -1,0 +1,30 @@
+{% extends 'layouts/full_page_fluid.html.twig' %}
+{% block title %}Articles{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Articles</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Author
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for article in articles %}
+                <tr>
+                    <td>
+                        <a href="{{path('article_show', {'slug': article.slug})  }}">{{ article.title }}</a>
+                    </td>
+                    <td>Author</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
