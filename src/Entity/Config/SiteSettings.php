@@ -163,7 +163,7 @@ class SiteSettings
     /**
      * The "@username" for the website used in the card footer.
      * The "@username" for the content creator / author.
-     * 
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $twitterUsername;
