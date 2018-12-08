@@ -109,6 +109,7 @@ class User implements UserInterface
         $this->createdAt = new \DateTime("now");
         $this->updatedAt = new \DateTime("now");
         $this->articles = new ArrayCollection();
+        $this->roles = ["ROLE_USER"];
     }
 
     public function getId(): ?int
