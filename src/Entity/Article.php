@@ -65,6 +65,12 @@ class Article implements AuthoredEntityInterface
      */
     private $author;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
     public function __construct()
     {
         $this->isPublished = false;
@@ -171,6 +177,18 @@ class Article implements AuthoredEntityInterface
     public function setAuthor(?UserInterface $author): AuthoredEntityInterface
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
