@@ -4,11 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\PageBuilderService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ArticleController extends AbstractController
+class ArticleController extends PageController
 {
     /**
      * @Route("/articles", name="article_list")
@@ -17,9 +17,10 @@ class ArticleController extends AbstractController
      */
     public function list(ArticleRepository $repository)
     {
-        $articles = $repository->findAll();
+        $content = $repository->findAll();
         return $this->render('article/list.html.twig', [
-            'articles' => $articles
+            'content' => $content,
+            'page' => $this->page,
         ]);
     }
 
@@ -32,12 +33,17 @@ class ArticleController extends AbstractController
     public function show($slug, ArticleRepository $repository)
     {
         /** @var Article $article */
-        $article = $repository->findOneBy(['slug' => $slug]);
-        if (!$article) {
+        $content = $repository->findOneBy(['slug' => $slug]);
+
+        if (!$content) {
             throw $this->createNotFoundException(sprintf('No article for slug "%s"', $slug));
         }
+        $builder = new PageBuilderService();
+        $this->page = $builder->buildSocialMetaData($content, $this->page);
+
         return $this->render('article/show.html.twig', [
-            'article' => $article
+            'content' => $content,
+            'page' => $this->page,
         ]);
     }
 }
