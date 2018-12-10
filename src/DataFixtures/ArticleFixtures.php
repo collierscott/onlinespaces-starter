@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Article;
+use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\Category;
 use App\Entity\User;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -21,8 +22,9 @@ class ArticleFixtures extends BaseFixture implements DependentFixtureInterface
             $paragraphs = $this->faker->paragraphs(4,false);
             $content = "<p>" . implode("</p><p>", $paragraphs) . "</p>";
             $article = new Article();
-            $article->setTitle($this->faker->sentence(4, true))
-                ->setContent($content);
+            $article->setTitle($this->faker->sentence(4, true));
+            $article->setContent($content);
+            $article->setIntroContent(substr(implode("", $paragraphs), 0, 150));
 
             // publish most articles
             if ($this->faker->boolean(70)) {
@@ -31,7 +33,6 @@ class ArticleFixtures extends BaseFixture implements DependentFixtureInterface
 
             $article->setAuthor($this->getRandomReference('main_users'));
             $article->setCoverImage($this->faker->randomElement(self::$articleImages));
-
             $article->setCategory($this->getRandomReference('child_categories'));
 
             return $article;
