@@ -2,8 +2,18 @@
 
 namespace App\Seo\Provider;
 
-class SeoProvider
+use App\Seo\Model\AbstractSeoGenerator;
+
+class SeoGeneratorProvider
 {
+    /** @var AbstractSeoGenerator[] */
+    private $generators;
+
+    public function __construct(array $generators)
+    {
+        $this->generators = $generators;
+    }
+
     public function get($alias)
     {
         if (!isset($this->generators[$alias])) {
