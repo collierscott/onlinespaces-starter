@@ -2,7 +2,7 @@
 
 namespace App\Seo\Model;
 
-use App\Seo\Service\TagBuilder;
+use App\Seo\Builder\TagBuilder;
 
 abstract class AbstractSeoGenerator implements RenderableInterface
 {
