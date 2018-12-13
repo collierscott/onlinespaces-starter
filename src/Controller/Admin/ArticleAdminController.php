@@ -51,9 +51,10 @@ class ArticleAdminController extends AbstractController
     public function list(ArticleRepository $repository)
     {
         $articles = $repository->findAll();
+        $context['content'] = $articles;
 
         return $this->render('admin/article/list.html.twig', [
-            'articles' => $articles,
+            'context' => $context,
         ]);
     }
 

@@ -2,16 +2,16 @@
 
 namespace App\Entity;
 
-use App\Entity\Abstracts\AuthoredEntityInterface;
+use App\Model\AuthoredEntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
+ * @ORM\Table(name="articles")
  */
-class Article implements AuthoredEntityInterface
+class Article extends AbstractPage implements AuthoredEntityInterface
 {
     use TimestampableEntity;
 
@@ -21,17 +21,6 @@ class Article implements AuthoredEntityInterface
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $title;
-
-    /**
-     * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(type="string", length=100, unique=true)
-     */
-    private $slug;
 
     /**
      * @ORM\Column(type="text")
@@ -73,36 +62,13 @@ class Article implements AuthoredEntityInterface
 
     public function __construct()
     {
+        parent::__construct();
         $this->isPublished = false;
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
     }
 
     public function getContent(): ?string

@@ -2,16 +2,19 @@
 
 namespace App\Entity;
 
+use App\Model\NodeTypeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @ORM\Table(name="categories")
  */
-class Category
+class Category implements NodeTypeInterface
 {
     use TimestampableEntity;
 
@@ -65,7 +68,7 @@ class Category
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(string $title): NodeTypeInterface
     {
         $this->title= $title;
 
@@ -77,7 +80,7 @@ class Category
         return $this->slug;
     }
 
-    public function setSlug(string $slug): self
+    public function setSlug(string $slug): NodeTypeInterface
     {
         $this->slug = $slug;
 

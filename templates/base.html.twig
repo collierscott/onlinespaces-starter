@@ -1,5 +1,13 @@
+{% set page = null %}
+{% set settings = null %}
+{% if context['settings'] is defined %}
+    {% set settings = context['settings'] %}
+{% endif %}
+{% if context['content'] is defined and context['content'] is not iterable %}
+    {% set page = context['content'] %}
+{% endif %}
 <!DOCTYPE html>
-<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" dir="ltr">
+<html lang="{{ onl_render_language(settings, page) }}" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" dir="ltr">
     <!--
         Regions:
             header: Items for the top header
@@ -15,13 +23,12 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Welcome{% endblock %}</title>
+        <!--<title>{% block title %}{{ onl_render_title(settings, page) }}{% endblock %}</title>//-->
         <!-- SEO Info -->
-        <meta name="description" content="Page description"/>
-        <meta name="keywords" content="Keywords" />
-        <meta name="author" content="Author" />
+        {% if settings is defined and page is defined %}
+            {{ onl_render_seo_metadata(settings, page) }}
+        {% endif %}
 
-        <link rel="publisher" href="{{ url('home_page') }}"/>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
@@ -30,6 +37,7 @@
         {% endblock %}
     </head>
     <body class="page">
+
         <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
