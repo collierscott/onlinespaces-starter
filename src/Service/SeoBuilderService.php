@@ -91,6 +91,12 @@ class SeoBuilderService
             'SITE_PUBLISHER'
         );
 
+        $creator = $this->getValue(
+            'twitter',
+            'twitter',
+            'SITE_TWITTER'
+        );
+
         $siteName = $this->getValue(
             'siteName',
             'siteName',
@@ -166,6 +172,12 @@ class SeoBuilderService
 //                }
 //            }
 //        }
+
+        $twitter->setTitle($title);
+        $twitter->setDescription($description);
+        $twitter->setSite($creator);
+        $twitter->setCard($creator);
+        $twitter->setCreator($creator);
 
         return $this->generators;
     }

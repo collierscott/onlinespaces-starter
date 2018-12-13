@@ -71,6 +71,25 @@ class TwitterSeoGenerator extends AbstractSeoGenerator
     {
         return $this->get('twitter:description');
     }
+
+    /**
+     * @param string $content
+     *
+     * @return $this
+     */
+    public function setCreator($content)
+    {
+        return $this->set('twitter:creator', $content);
+    }
+
+    /**
+     * @return MetaTag
+     */
+    public function getCreator()
+    {
+        return $this->get('twitter:creator');
+    }
+
     /**
      * @param string $content
      *
@@ -80,6 +99,7 @@ class TwitterSeoGenerator extends AbstractSeoGenerator
     {
         return $this->set('twitter:image', $content);
     }
+
     /**
      * @return MetaTag
      */
@@ -97,6 +117,7 @@ class TwitterSeoGenerator extends AbstractSeoGenerator
     {
         return $this->tagBuilder->getMeta($type);
     }
+
     /**
      * @param string $type
      * @param string $value
