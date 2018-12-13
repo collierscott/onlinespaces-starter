@@ -23,6 +23,7 @@ class OpenGraphSeoGenerator extends AbstractSeoGenerator
     {
         return $this->get('og:type');
     }
+
     /**
      * @param string $content
      *
@@ -39,6 +40,7 @@ class OpenGraphSeoGenerator extends AbstractSeoGenerator
     {
         return $this->get('og:title');
     }
+
     /**
      * @param string $content
      *
@@ -55,6 +57,24 @@ class OpenGraphSeoGenerator extends AbstractSeoGenerator
     {
         return $this->get('og:description');
     }
+
+    /**
+     * @param string $content
+     *
+     * @return $this
+     */
+    public function setSiteName($content)
+    {
+        return $this->set('og:site_name', $content);
+    }
+    /**
+     * @return MetaTag
+     */
+    public function getSiteName()
+    {
+        return $this->get('og:site_name');
+    }
+
     /**
      * @param string $content
      *

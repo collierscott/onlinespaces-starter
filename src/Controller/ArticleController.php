@@ -41,7 +41,7 @@ class ArticleController extends PageController
         }
 
         $context['content'] = $article;
-        $context['page'] = $this->page;
+        $context['settings'] = $this->settings;
 
         return $this->render('article/show.html.twig', [
             'context' => $context,

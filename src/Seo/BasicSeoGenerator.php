@@ -32,6 +32,72 @@ class BasicSeoGenerator extends AbstractSeoGenerator
      *
      * @return $this
      */
+    public function setAuthor($content)
+    {
+        $this->tagBuilder->addMeta('author')
+            ->setType(MetaTag::NAME_TYPE)
+            ->setValue('author')
+            ->setContent((string) $content);
+        return $this;
+    }
+
+    /**
+     * @return MetaTag
+     */
+    public function getAuthor()
+    {
+        return $this->tagBuilder->getMeta('author');
+    }
+
+    /**
+     * @param string $content
+     *
+     * @return $this
+     */
+    public function setSummary($content)
+    {
+        $this->tagBuilder->addMeta('summary')
+            ->setType(MetaTag::NAME_TYPE)
+            ->setValue('summary')
+            ->setContent((string) $content);
+        return $this;
+    }
+
+    /**
+     * @return MetaTag
+     */
+    public function getSummary()
+    {
+        return $this->tagBuilder->getMeta('summary');
+    }
+
+    /**
+     * @param string $content
+     *
+     * @return $this
+     */
+    public function setLanguage($content)
+    {
+        $this->tagBuilder->addMeta('language')
+            ->setType(MetaTag::NAME_TYPE)
+            ->setValue('language')
+            ->setContent((string) $content);
+        return $this;
+    }
+
+    /**
+     * @return MetaTag
+     */
+    public function getLanguage()
+    {
+        return $this->tagBuilder->getMeta('language');
+    }
+
+    /**
+     * @param string $content
+     *
+     * @return $this
+     */
     public function setDescription($content)
     {
         $this->tagBuilder->addMeta('description')

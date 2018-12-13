@@ -1,4 +1,5 @@
 {% set page = null %}
+{% set settings = null %}
 {% if context['settings'] is defined %}
     {% set settings = context['settings'] %}
 {% endif %}
@@ -22,7 +23,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}{{ onl_render_title(settings, page) }}{% endblock %}</title>
+        <!--<title>{% block title %}{{ onl_render_title(settings, page) }}{% endblock %}</title>//-->
         <!-- SEO Info -->
         {% if settings is defined and page is defined %}
             {{ onl_render_seo_metadata(settings, page) }}
