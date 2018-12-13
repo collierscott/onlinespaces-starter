@@ -94,4 +94,52 @@ class AbstractPage implements ContentInterface
         $this->language = $language;
         return $this;
     }
+
+    /**
+     * @return SeoMetadata
+     */
+    public function getSeoMetaData(): SeoMetadata
+    {
+        return $this->seoMetaData;
+    }
+
+    /**
+     * @param SeoMetadata $seoMetaData
+     */
+    public function setSeoMetaData(SeoMetadata $seoMetaData): void
+    {
+        $this->seoMetaData = $seoMetaData;
+    }
+
+    /**
+     * @return FacebookPageData
+     */
+    public function getFacebookMetaData(): FacebookPageData
+    {
+        return $this->facebookMetaData;
+    }
+
+    /**
+     * @param FacebookPageData $facebookMetaData
+     */
+    public function setFacebookMetaData(FacebookPageData $facebookMetaData): void
+    {
+        $this->facebookMetaData = $facebookMetaData;
+    }
+
+    /**
+     * @return TwitterPageData
+     */
+    public function getTwitterMetaData(): TwitterPageData
+    {
+        return $this->twitterMetaData;
+    }
+
+    /**
+     * @param TwitterPageData $twitterMetaData
+     */
+    public function setTwitterMetaData(TwitterPageData $twitterMetaData): void
+    {
+        $this->twitterMetaData = $twitterMetaData;
+    }
 }

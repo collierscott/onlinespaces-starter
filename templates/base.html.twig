@@ -1,3 +1,4 @@
+{% set page = context['page'] %}
 <!DOCTYPE html>
 <html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" dir="ltr">
     <!--
@@ -17,6 +18,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Welcome{% endblock %}</title>
         <!-- SEO Info -->
+        {% if page is defined %}
+            {{ onl_render_seo_metadata(page) }}
+        {% endif %}
         <meta name="description" content="Page description"/>
         <meta name="keywords" content="Keywords" />
         <meta name="author" content="Author" />
