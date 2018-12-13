@@ -18,7 +18,7 @@ class ArticleController extends PageController
     {
         $content = $repository->findAll();
         $context['content'] = $content;
-        $context['page'] = $this->page;
+        $context['settings'] = $this->settings;
 
         return $this->render('article/list.html.twig', [
             'context' => $context,

@@ -25,11 +25,6 @@ class Article extends AbstractPage implements AuthoredEntityInterface
     /**
      * @ORM\Column(type="text")
      */
-    private $introContent;
-
-    /**
-     * @ORM\Column(type="text")
-     */
     private $content;
 
     /**
@@ -74,18 +69,6 @@ class Article extends AbstractPage implements AuthoredEntityInterface
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIntroContent(): ?string
-    {
-        return $this->introContent;
-    }
-
-    public function setIntroContent(string $content): self
-    {
-        $this->introContent = $content;
-
-        return $this;
     }
 
     public function getContent(): ?string

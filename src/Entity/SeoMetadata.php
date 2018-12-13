@@ -25,6 +25,12 @@ class SeoMetadata implements SeoMetadataInterface
     private $title;
 
     /**
+     * @var string siteName
+     * @ORM\Column(type="string")
+     */
+    private $siteName;
+
+    /**
      * @var string|null $metaDescription
      * @ORM\Column(name="meta_description", type="string", nullable=true)
      */
@@ -90,6 +96,22 @@ class SeoMetadata implements SeoMetadataInterface
     public function getTitle(): string
     {
         return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSiteName(): string
+    {
+        return $this->siteName;
+    }
+
+    /**
+     * @param string $siteName
+     */
+    public function setSiteName(string $siteName): void
+    {
+        $this->siteName = $siteName;
     }
 
     /**
