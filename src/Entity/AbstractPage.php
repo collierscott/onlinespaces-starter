@@ -15,6 +15,20 @@ class AbstractPage implements ContentInterface
     protected $title;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", nullable=true, name="page_title")
+     */
+    protected $pageTitle;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text", name="summary")
+     */
+    private $summary;
+
+    /**
      * @var string $slug
      *
      * @Gedmo\Slug(fields={"title"})
@@ -63,6 +77,40 @@ class AbstractPage implements ContentInterface
     public function setTitle(string $title): ContentInterface
     {
         $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPageTitle(): ?string
+    {
+        return $this->pageTitle;
+    }
+
+    /**
+     * @param string|null $pageTitle
+     */
+    public function setPageTitle(?string $pageTitle): void
+    {
+        $this->pageTitle = $pageTitle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSummary(): string
+    {
+        return $this->summary;
+    }
+
+    /**
+     * @param string $summary
+     * @return AbstractPage
+     */
+    public function setSummary(string $summary): AbstractPage
+    {
+        $this->summary = $summary;
         return $this;
     }
 
@@ -141,5 +189,10 @@ class AbstractPage implements ContentInterface
     public function setTwitterMetaData(TwitterPageData $twitterMetaData): void
     {
         $this->twitterMetaData = $twitterMetaData;
+    }
+
+    public function getAuthor()
+    {
+        return '';
     }
 }

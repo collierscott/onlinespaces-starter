@@ -1,4 +1,10 @@
-{% set page = context['page'] %}
+{% set page = null %}
+{% if context['settings'] is defined %}
+    {% set settings = context['settings'] %}
+{% endif %}
+{% if context['content'] is defined and context['content'] is not iterable %}
+    {% set page = context['content'] %}
+{% endif %}
 <!DOCTYPE html>
 <html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" dir="ltr">
     <!--
@@ -18,8 +24,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Welcome{% endblock %}</title>
         <!-- SEO Info -->
-        {% if page is defined %}
-            {{ onl_render_seo_metadata(page) }}
+        {% if settings is defined and page is defined %}
+            {{ onl_render_seo_metadata(settings, page) }}
         {% endif %}
         <meta name="description" content="Page description"/>
         <meta name="keywords" content="Keywords" />

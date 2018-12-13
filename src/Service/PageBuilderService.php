@@ -4,21 +4,23 @@ namespace App\Service;
 
 use App\Entity\Config\SiteSettings;
 use App\Entity\AbstractPage;
+use App\Entity\Page;
+use App\Entity\SeoMetadata;
 
 class PageBuilderService
 {
     public function buildPage(SiteSettings $settings = null)
     {
-        $page = new AbstractPage();
+        $page = new SeoMetadata();
         if($settings == null) {
             $settings = new SiteSettings();
-            return $page;
+            return $settings;
         }
 
         $page->setSiteName($settings->getSiteName());
         $page->setTitle($settings->getSiteName());
-        $page->setDescription($settings->getDescription());
-        $page->setKeywords($settings->getKeywords());
+        $page->setMetaDescription($settings->getDescription());
+        $page->setMetaDescription($settings->getKeywords());
         $page->setLanguage($settings->getLanguage());
         $page->setPublisher($this->url());
 
