@@ -27,11 +27,15 @@ class SeoTwigExtension extends \Twig_Extension
         return [
              new \Twig_SimpleFunction('onl_render_seo_metadata',
                 [$this, 'renderSeoMetadata'],
-                ['is_safe' => ['html'], 'needs_environment' => true]
+                ['is_safe' => ['html']]
             ),
             new \Twig_SimpleFunction('onl_render_title',
                 [$this, 'renderTitle'],
-                ['is_safe' => ['html'], 'needs_environment' => true]
+                ['is_safe' => ['html']]
+            ),
+            new \Twig_SimpleFunction('onl_render_language',
+                [$this, 'renderLanguage'],
+                ['is_safe' => ['html']]
             ),
         ];
     }
@@ -50,32 +54,29 @@ class SeoTwigExtension extends \Twig_Extension
         return $builder->getTitle();
     }
 
-    /**
-     * @param \Twig_Environment $environment
-     * @param SiteSettings $settings
-     * @param AbstractPage|null $page
-     * @param string $template
-     * @return false|string
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function renderSeoMetadata(
-        \Twig_Environment $environment,
+    public function renderLanguage(
         SiteSettings $settings,
-        AbstractPage $page = null,
-        $template = 'twig/seo-twig-extension/metadata.html.twig')
+        AbstractPage $page = null
+    )
     {
         $builder = new SeoBuilderService($settings, $this->params, $page);
-        $seo = $builder->build();
-
-        $template = $environment->load($template);
-        return $template->render([
-            'seo' =>$seo
-        ]);
+        return substr($builder->getLanguage(), 0, 2);
     }
 
-
+    /**
+     * @param SiteSettings $settings
+     * @param AbstractPage|null $page
+     * @return false|string
+     */
+    public function renderSeoMetadata(
+        SiteSettings $settings,
+        AbstractPage $page = null
+    )
+    {
+        $builder = new SeoBuilderService($settings, $this->params, $page);
+        $builder->build();
+        return $builder->render();
+    }
 
     public function getName()
     {

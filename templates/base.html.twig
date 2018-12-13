@@ -6,7 +6,7 @@
     {% set page = context['content'] %}
 {% endif %}
 <!DOCTYPE html>
-<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" dir="ltr">
+<html lang="{{ onl_render_language(settings, page) }}" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" dir="ltr">
     <!--
         Regions:
             header: Items for the top header
