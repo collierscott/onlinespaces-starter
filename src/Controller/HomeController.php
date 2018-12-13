@@ -11,8 +11,9 @@ class HomeController extends PageController
      */
     public function index()
     {
+        $context['settings'] = $this->settings;
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'context' => $context,
         ]);
     }
 }

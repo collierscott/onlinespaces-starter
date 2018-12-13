@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Abstracts;
+namespace App\Model;
 
 use App\Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
