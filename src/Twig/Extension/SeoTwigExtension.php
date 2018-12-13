@@ -29,7 +29,25 @@ class SeoTwigExtension extends \Twig_Extension
                 [$this, 'renderSeoMetadata'],
                 ['is_safe' => ['html'], 'needs_environment' => true]
             ),
+            new \Twig_SimpleFunction('onl_render_title',
+                [$this, 'renderTitle'],
+                ['is_safe' => ['html'], 'needs_environment' => true]
+            ),
         ];
+    }
+
+    /**
+     * @param SiteSettings $settings
+     * @param AbstractPage|null $page
+     * @return false|string
+     */
+    public function renderTitle(
+        SiteSettings $settings,
+        AbstractPage $page = null
+    )
+    {
+        $builder = new SeoBuilderService($settings, $this->params, $page);
+        return $builder->getTitle();
     }
 
     /**
@@ -50,12 +68,11 @@ class SeoTwigExtension extends \Twig_Extension
     {
         $builder = new SeoBuilderService($settings, $this->params, $page);
         $seo = $builder->build();
-//        $seo['seo'] = $page->getSeoMetaData();
-//        $seo['og'] = $page->getFacebookMetaData();
-//        $seo['twitter'] = $page->getTwitterMetaData();
 
         $template = $environment->load($template);
-        return $template->render($seo);
+        return $template->render([
+            'seo' =>$seo
+        ]);
     }
 
 
