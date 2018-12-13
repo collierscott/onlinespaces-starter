@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Config\SiteSettings;
-use App\Entity\Page;
+use App\Entity\AbstractPage;
 use App\Repository\SiteSettingsRepository;
 use App\Seo\BasicSeoGenerator;
 use App\Seo\Builder\TagBuilder;
@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PageController extends AbstractController
 {
-    /** @var Page **/
+    /** @var AbstractPage **/
     protected $page;
 
     /** @var SeoGeneratorProvider $seoProvider */

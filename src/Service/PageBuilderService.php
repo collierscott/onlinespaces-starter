@@ -3,13 +3,13 @@
 namespace App\Service;
 
 use App\Entity\Config\SiteSettings;
-use App\Entity\Page;
+use App\Entity\AbstractPage;
 
 class PageBuilderService
 {
     public function buildPage(SiteSettings $settings = null)
     {
-        $page = new Page();
+        $page = new AbstractPage();
         if($settings == null) {
             $settings = new SiteSettings();
             return $page;
@@ -37,9 +37,9 @@ class PageBuilderService
     }
 
     /**
-     * @param Page $page
+     * @param AbstractPage $page
      * @param Content $content
-     * @return Page
+     * @return AbstractPage
      */
     public static function buildPageFromContent(Content $content, $page)
     {
@@ -57,7 +57,7 @@ class PageBuilderService
         return $page;
     }
 
-    public function buildSocialMetaData(Page $page)
+    public function buildSocialMetaData(AbstractPage $page)
     {
         $data["og:locale"] = $page->getLanguage() ?? "en_US";
         //$data["og:type"] = $this->getFacebookType() ?? $this->metaContentType ?? "website";
