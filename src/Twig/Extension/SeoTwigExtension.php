@@ -28,24 +28,29 @@ class SeoTwigExtension extends \Twig_Extension
 
     /**
      * @param \Twig_Environment $environment
-     * @param AbstractPage $entity
-     * @param null $currentNode
+     * @param AbstractPage $page
+     * @param AbstractPage $content
      * @param string $template
      * @return false|string
-     * @throws \Throwable
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
     public function renderSeoMetadata(
         \Twig_Environment $environment,
-        AbstractPage $entity,
-        $currentNode = null,
+        AbstractPage $page,
+        AbstractPage $content = null,
         $template = 'twig/seo-twig-extension/metadata.html.twig')
     {
+        $seo['seo'] = $page->getSeoMetaData();
+        $seo['og'] = $page->getFacebookMetaData();
+        $seo['twitter'] = $page->getTwitterMetaData();
+
         $template = $environment->load($template);
         return $template->render([]);
     }
+
+
 
     public function getName()
     {
