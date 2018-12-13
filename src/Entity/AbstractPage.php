@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use App\Model\ContentInterface;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
-abstract class Content implements ContentInterface
+class AbstractPage implements ContentInterface
 {
     /**
      * @var string $title
@@ -85,7 +87,7 @@ abstract class Content implements ContentInterface
 
     /**
      * @param string $language
-     * @return Content
+     * @return ContentInterface
      */
     public function setLanguage(string $language): ContentInterface
     {
