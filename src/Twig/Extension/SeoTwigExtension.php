@@ -46,7 +46,7 @@ class SeoTwigExtension extends \Twig_Extension
      * @return false|string
      */
     public function renderTitle(
-        SiteSettings $settings,
+        SiteSettings $settings = null,
         AbstractPage $page = null
     )
     {
@@ -55,10 +55,13 @@ class SeoTwigExtension extends \Twig_Extension
     }
 
     public function renderLanguage(
-        SiteSettings $settings,
+        SiteSettings $settings = null,
         AbstractPage $page = null
     )
     {
+        if(!$settings) {
+            $settings = new SiteSettings();
+        }
         $builder = new SeoBuilderService($settings, $this->params, $page);
         return substr($builder->getLanguage(), 0, 2);
     }
@@ -69,10 +72,13 @@ class SeoTwigExtension extends \Twig_Extension
      * @return false|string
      */
     public function renderSeoMetadata(
-        SiteSettings $settings,
+        SiteSettings $settings = null,
         AbstractPage $page = null
     )
     {
+        if(!$settings) {
+            $settings = new SiteSettings();
+        }
         $builder = new SeoBuilderService($settings, $this->params, $page);
         $builder->build();
         return $builder->render();

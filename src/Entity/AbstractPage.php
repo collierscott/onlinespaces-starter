@@ -162,7 +162,7 @@ class AbstractPage implements ContentInterface
     /**
      * @return FacebookPageData
      */
-    public function getFacebookMetaData(): FacebookPageData
+    public function getFacebookMetaData(): ?FacebookPageData
     {
         return $this->facebookMetaData;
     }
@@ -178,7 +178,7 @@ class AbstractPage implements ContentInterface
     /**
      * @return TwitterPageData
      */
-    public function getTwitterMetaData(): TwitterPageData
+    public function getTwitterMetaData(): ?TwitterPageData
     {
         return $this->twitterMetaData;
     }
@@ -198,8 +198,12 @@ class AbstractPage implements ContentInterface
 
     public function __get($name)
     {
-        if(property_exists($this, $name)){
-         return $this->$name;
+        if($name === 'seoMetaData->metaKeywords') {
+            dd($this->$name);
+        }
+
+        if(method_exists($this, $name)){
+         return $this->{$name};
         }
 
         return null;
