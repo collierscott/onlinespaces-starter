@@ -15,12 +15,14 @@ class SeoBuilderService
     private $settings;
     private $page;
     private $params;
+    private $builder;
 
     public function __construct(SiteSettings $settings, ParameterBagInterface $params, AbstractPage $page = null)
     {
         $this->settings = $settings;
         $this->page = $page;
         $this->params = $params;
+        $this->builder = new TagBuilder(new TagFactory());
     }
 
     public function getTitle()
@@ -28,48 +30,56 @@ class SeoBuilderService
         return $this->getValue('siteName','title', 'SITE_TITLE');
     }
 
+    public function getLanguage()
+    {
+        return $this->getValue(
+            'language',
+            'language',
+            'SITE_LANGUAGE'
+        );
+    }
+
     /**
      * @return array
      */
     public function build()
     {
-        $builder = new TagBuilder(new TagFactory());
-        $builder->setTitle($this->getValue('siteName','title', 'SITE_TITLE'));
-
-        $builder->addMeta(
+        $title = $this->getValue('siteName','title', 'SITE_TITLE');
+        $description = $this->getValue(
             'description',
-            MetaTag::NAME_TYPE,
-            'description',
-            $this->getValue(
-                'description',
-                'summary',
-                'SITE_DESCRIPTION'
-            )
+            'summary',
+            'SITE_DESCRIPTION'
         );
 
-        $builder->addMeta(
+        $author = $this->getValue(
             'author',
-            MetaTag::NAME_TYPE,
             'author',
-            $this->getValue(
-                'author',
-                'author',
-                'SITE_AUTHOR'
-            )
+            'SITE_AUTHOR'
         );
 
-        $builder->addMeta(
+        $language = $this->getValue(
             'language',
-            MetaTag::NAME_TYPE,
             'language',
-            $this->getValue(
-                'language',
-                'language',
-                'SITE_LANGUAGE'
-            )
+            'SITE_LANGUAGE'
         );
 
-        $builder->addMeta(
+        $this->builder->setTitle($title);
+        $this->builder->addMeta('description')
+            ->setType(MetaTag::NAME_TYPE)
+            ->setContent($description)
+            ->setValue('description');
+
+        $this->builder->addMeta('author')
+            ->setType(MetaTag::NAME_TYPE)
+            ->setValue('author')
+            ->setContent($author);
+
+        $this->builder->addMeta('language')
+            ->setType(MetaTag::NAME_TYPE)
+            ->setValue('language')
+            ->setContent($language);
+
+        $this->builder->addMeta(
             'keywords',
             MetaTag::NAME_TYPE,
             'keywords',
@@ -80,7 +90,7 @@ class SeoBuilderService
             )
         );
 
-        $builder->addLink("publisher")
+        $this->builder->addLink("publisher")
             ->setRel('publisher')
             ->setTitle($this->getValue('siteName','title', 'SITE_TITLE'))
             ->setHref(
@@ -91,7 +101,7 @@ class SeoBuilderService
                 )
             );
 
-        $builder->addMeta('robots')
+        $this->builder->addMeta('robots')
             ->setType(MetaTag::NAME_TYPE)
             ->setValue('robots')
             ->setContent(
@@ -102,12 +112,23 @@ class SeoBuilderService
                 )
             );
 
-        $seo = $builder->getTags();
+        $this->builder->addMeta('og:locale');
+        //$seo = $builder->getTags();
 
 //        $page->setFacebook($content->getFacebook());
 //        $page->setTwitter($content->getTwitter());
 
-        return $seo;
+        return $this->builder->getTags();
+    }
+
+    public function render()
+    {
+        return $this->builder->render();
+    }
+
+    public function __toString()
+    {
+        return $this->builder->render();
     }
 
     private function getValue(
