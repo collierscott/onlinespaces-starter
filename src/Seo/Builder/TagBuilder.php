@@ -137,6 +137,24 @@ class TagBuilder implements RenderableInterface
     }
 
     /**
+     * @return array
+     */
+    public function getTags()
+    {
+        $tags = [];
+        if (null !== $this->title) {
+            array_push($tags, $this->title);
+        }
+        if (count($this->metas) > 0) {
+            $tags = array_merge($tags, $this->metas);
+        }
+        if (count($this->links) > 0) {
+            $tags = array_merge($tags, $this->links);
+        }
+        return  $tags;
+    }
+
+    /**
      * @return string
      */
     public function __toString()

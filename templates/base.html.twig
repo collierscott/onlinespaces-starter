@@ -22,16 +22,12 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Welcome{% endblock %}</title>
+        <title>{% block title %}{{ onl_render_title(settings, page) }}{% endblock %}</title>
         <!-- SEO Info -->
         {% if settings is defined and page is defined %}
             {{ onl_render_seo_metadata(settings, page) }}
         {% endif %}
-        <meta name="description" content="Page description"/>
-        <meta name="keywords" content="Keywords" />
-        <meta name="author" content="Author" />
 
-        <link rel="publisher" href="{{ url('home_page') }}"/>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
