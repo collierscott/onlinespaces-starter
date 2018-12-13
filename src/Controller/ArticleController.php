@@ -18,9 +18,11 @@ class ArticleController extends PageController
     public function list(ArticleRepository $repository)
     {
         $content = $repository->findAll();
+        $context['content'] = $content;
+        $context['page'] = $this->page;
+
         return $this->render('article/list.html.twig', [
-            'content' => $content,
-            'page' => $this->page,
+            'context' => $context,
         ]);
     }
 
@@ -38,12 +40,15 @@ class ArticleController extends PageController
         if (!$content) {
             throw $this->createNotFoundException(sprintf('No article for slug "%s"', $slug));
         }
-        $builder = new PageBuilderService();
-        $this->page = $builder->buildSocialMetaData($content, $this->page);
+
+        //$builder = new PageBuilderService();
+        //$this->page = $builder->buildSocialMetaData($this->page);
+
+        $context['content'] = $content;
+        $context['page'] = $this->page;
 
         return $this->render('article/show.html.twig', [
-            'content' => $content,
-            'page' => $this->page,
+            'context' => $context,
         ]);
     }
 }

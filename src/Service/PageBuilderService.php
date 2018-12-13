@@ -38,10 +38,10 @@ class PageBuilderService
 
     /**
      * @param AbstractPage $page
-     * @param Content $content
+     * @param AbstractPage $content
      * @return AbstractPage
      */
-    public static function buildPageFromContent(Content $content, $page)
+    public static function buildPageFromContent(AbstractPage $content, $page)
     {
         if(null !== $content->getTitle()) $page->setTitle($content->getTitle());
         if(null !== $content->getLanguage() || "*" == $content->getLanguage()) $page->setLanguage($content->getLanguage());
@@ -61,7 +61,7 @@ class PageBuilderService
     {
         $data["og:locale"] = $page->getLanguage() ?? "en_US";
         //$data["og:type"] = $this->getFacebookType() ?? $this->metaContentType ?? "website";
-        $data["og:site_name"] = $page->getSiteName();
+        $data["og:site_name"] = $page->getSeoMetaData()->getSiteName();
 
         $data["og:title"] = $page->getTitle();
         $data["og:description"] = $page->getDescription();
