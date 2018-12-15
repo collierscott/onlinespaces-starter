@@ -49,6 +49,8 @@ class ApplicationMenuProvider implements MenuProviderInterface
         foreach ($root->getChildren() as $item) {
             $menu->addChild($item->getLabel(), [
                 'route' => $item->getLink(),
+                'label' => "<i class='fal fa-home'> </i>" . $item->getLabel(),
+                'extras' => array('safe_label' => true),
                 'linkAttributes' => [
                     'class' => 'nav-link'
                 ],
