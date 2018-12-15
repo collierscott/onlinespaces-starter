@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use App\Form\ArticleFormType;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +22,7 @@ class AdminArticleController extends AbstractController
      */
     public function new(EntityManagerInterface $manager, Request $request)
     {
-        $form = $this->createForm(ArticleFormType::class);
+        $form = $this->createForm(ArticleType::class);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -67,7 +67,7 @@ class AdminArticleController extends AbstractController
      */
     public function edit(Article $article, Request $request, EntityManagerInterface $manager)
     {
-        $form = $this->createForm(ArticleFormType::class, $article);
+        $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($request);
 

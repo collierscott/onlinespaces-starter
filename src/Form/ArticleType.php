@@ -9,10 +9,11 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ArticleFormType extends AbstractType
+class ArticleType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -40,6 +41,12 @@ class ArticleFormType extends AbstractType
                     'No' => false,
                 ],
             ])
+            ->add('publishedStartAt', DateTimeType::class, array(
+                'label' => 'Start Publishing',
+            ))
+            ->add('publishedEndAt', DateTimeType::class, array(
+                'label' => 'Stop Publishing',
+            ))
             ,
             $options
         );
