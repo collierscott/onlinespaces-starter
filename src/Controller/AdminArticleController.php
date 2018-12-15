@@ -39,7 +39,7 @@ class AdminArticleController extends AbstractController
         }
 
         return $this->render('admin/article/new.html.twig', [
-            'articleForm' => $form->createView()
+            'form' => $form->createView()
         ]);
     }
 
@@ -83,7 +83,7 @@ class AdminArticleController extends AbstractController
         }
 
         return $this->render('admin/article/edit.html.twig', [
-            'articleForm' => $form->createView()
+            'form' => $form->createView()
         ]);
     }
 

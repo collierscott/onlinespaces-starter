@@ -22,11 +22,11 @@ class ArticleFormType extends AbstractType
         parent::buildForm(
             $builder
                 ->add('title')
-                ->add('coverImage', ElFinderType::class, array(
+                ->add('coverImage', ElFinderType::class, [
                     'label' => 'Featured Image',
                     'instance' => 'single_file',
                     'enable' => true,
-                ))
+                ])
             ->add('content', CKEditorType::class, array(
                 'attr' => array('id' => 'editor', 'rows' => 20)
             ))
