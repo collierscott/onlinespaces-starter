@@ -390,12 +390,12 @@ class SiteSettings
         return $this;
     }
 
-    public function getFacebookProfileId(): ?int
+    public function getFacebookProfileId(): ?string
     {
         return $this->facebookProfileId;
     }
 
-    public function setFacebookProfileId(int $facebookProfileId): self
+    public function setFacebookProfileId(string $facebookProfileId): self
     {
         $this->facebookProfileId = $facebookProfileId;
 

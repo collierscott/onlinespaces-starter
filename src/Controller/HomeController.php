@@ -11,7 +11,7 @@ class HomeController extends PageController
      */
     public function index()
     {
-        $this->addFlash('error', 'Testing');
+        //$this->addFlash('error', 'Testing');
 
         $context['settings'] = $this->settings;
         return $this->render('home/index.html.twig', [
