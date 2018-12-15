@@ -6,9 +6,6 @@
                 label: 'Article title'
             }) }}
             {{ form_row(form.content) }}
-            {% if form.publishedAt is defined %}
-                {{ form_row(form.publishedAt) }}
-            {% endif %}
             <div class="text-right">
                 <a href="{{ path('admin_article_list') }}" type="button" class="btn btn-danger">Cancel</a>
                 <button type="submit" class="btn btn-primary">{{ button_text }}</button>
@@ -26,6 +23,12 @@
             {% endif %}
             {{ form_row(form.isPublished) }}
             {{ form_row(form.category) }}
+            {% if form.publishedStartAt is defined %}
+                {{ form_row(form.publishedStartAt) }}
+            {% endif %}
+            {% if form.publishedEndAt is defined %}
+                {{ form_row(form.publishedEndAt) }}
+            {% endif %}
         </div>
         </div>
     {{ form_end(form) }}
