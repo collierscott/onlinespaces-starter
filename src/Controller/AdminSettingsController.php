@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Config\SiteSettings;
 use App\Form\SettingsType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,7 +30,20 @@ class AdminSettingsController extends AbstractController
      */
     public function siteSettings(EntityManagerInterface $em, Request $request)
     {
-        $form = $this->createForm(SettingsType::class);
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var SiteSettings $page */
+        $settings = $em->getRepository('App\Entity\Config\SiteSettings')
+            ->findAll();
+
+        if(!$settings) {
+            $settings = new SiteSettings();
+        } else {
+            $settings = $settings[0];
+        }
+
+        $form = $this->createForm(SettingsType::class, $settings);
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
