@@ -10,12 +10,10 @@
                     </div>
                 </div>
             {% endif %}
-
+            {% block breadcrumb %}{% endblock %}
             {% block content %}{% endblock %}
         </div>
     </div>
     {% include '_layouts/default/_subfooter.html.twig' %}
     {% include '_layouts/default/_footer.html.twig' %}
 {% endblock %}
-
-{% block breadcrumb %}{% endblock %}
