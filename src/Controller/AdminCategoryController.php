@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,9 +34,23 @@ class AdminCategoryController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request)
+    public function new(Request $request, EntityManagerInterface $em)
     {
-        return $this->render('admin/categories/new.html.twig');
+        $form = $this->createForm(CategoryType::class);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $category = $form->getData();
+            $em->persist($category);
+            $em->flush();
+            $this->addFlash('success', 'The category was successfully completed.');
+            return $this->redirectToRoute('admin_categories_list');
+        }
+
+        return $this->render('admin/categories/new.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
