@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller;
 
 use App\Entity\Article;
-use App\Form\ArticleFormType;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class ArticleAdminController extends AbstractController
+class AdminArticleController extends AbstractController
 {
     /**
      * @Route("/admin/articles/new", name="admin_article_new", methods={"GET", "POST"})
@@ -22,7 +22,7 @@ class ArticleAdminController extends AbstractController
      */
     public function new(EntityManagerInterface $manager, Request $request)
     {
-        $form = $this->createForm(ArticleFormType::class);
+        $form = $this->createForm(ArticleType::class);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -39,7 +39,7 @@ class ArticleAdminController extends AbstractController
         }
 
         return $this->render('admin/article/new.html.twig', [
-            'articleForm' => $form->createView()
+            'form' => $form->createView()
         ]);
     }
 
@@ -67,7 +67,7 @@ class ArticleAdminController extends AbstractController
      */
     public function edit(Article $article, Request $request, EntityManagerInterface $manager)
     {
-        $form = $this->createForm(ArticleFormType::class, $article);
+        $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($request);
 
@@ -83,7 +83,7 @@ class ArticleAdminController extends AbstractController
         }
 
         return $this->render('admin/article/edit.html.twig', [
-            'articleForm' => $form->createView()
+            'form' => $form->createView()
         ]);
     }
 

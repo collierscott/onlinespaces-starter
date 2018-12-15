@@ -23,7 +23,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--<title>{% block title %}{{ onl_render_title(settings, page) }}{% endblock %}</title>//-->
+        <title>{% block title %}{{ onl_render_title(settings, page) }}{% endblock %}</title>
         <!-- SEO Info -->
         {% if settings is defined and page is defined %}
             {{ onl_render_seo_metadata(settings, page) }}
@@ -47,7 +47,7 @@
                 {% block top_navigation %}{% endblock %}
             </div>
         </header>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row flex-xl-nowrap">
                 <div class="col-12">
                     {% block featured_top %}{% endblock %}
@@ -109,16 +109,13 @@
         </div>
         {% block footer%}
             <footer class="footer">
-                <div class="container-fluid">
+                <div class="container">
                     <span class="text-muted">&copy; Onlinespaces 2018</span>
                 </div>
             </footer>
         {% endblock %}
         {% block javascripts %}
-            {#<script src="{{ asset('build/vendors~app.js') }}"></script>#}
-            <script src="{{ asset('build/app.js') }}"></script>
-            <script src="{{ asset('build/runtime.js') }}"></script>
         {% endblock %}
+        {{ encore_entry_script_tags('app') }}
     </body>
 </html>
-

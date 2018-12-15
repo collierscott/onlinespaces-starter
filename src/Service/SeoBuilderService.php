@@ -9,8 +9,6 @@ use App\Seo\Builder\TagBuilder;
 use App\Seo\FacebookSeoGenerator;
 use App\Seo\Factory\TagFactory;
 use App\Seo\Model\AbstractSeoGenerator;
-use App\Seo\Model\LinkTag;
-use App\Seo\Model\MetaTag;
 use App\Seo\OpenGraphSeoGenerator;
 use App\Seo\TwitterSeoGenerator;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -125,7 +123,7 @@ class SeoBuilderService
 
         $description = substr($description, 0, 150);
 
-        $basic->setTitle($title);
+        //$basic->setTitle($title);
         $basic->setDescription($description);
         $basic->setKeywords($keywords);
         $basic->setRobots($shouldIndex, $shouldFollow);

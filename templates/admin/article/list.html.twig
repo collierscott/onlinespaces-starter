@@ -1,4 +1,4 @@
-{% extends 'layouts/full_page_fluid.html.twig' %}
+{% extends '_layouts/default.html.twig' %}
 {% block title %}Articles{% endblock %}
 {% set articles = context['content'] %}
 {% block body %}
@@ -17,6 +17,7 @@
                         </th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,18 +27,21 @@
                             <td>{{ article.title }}</td>
                             <td>{{ article.author.username }}</td>
                             <td>
-                                <a href="{{ path('admin_article_delete', {
-                                    id: article.id
-                                }) }}">
-                                    <span class="fa fa-{{ article.isPublished ? 'check' : 'times' }}"></span>
-                                </a>
-                            </td>
-                            <td>
                                 <a href="{{ path('admin_article_edit', {
                                     id: article.id
                                 }) }}">
                                     <span class="fa fa-pencil"></span>
                                 </a>
+                            </td>
+                            <td>
+                                <a href="{{ path('admin_article_delete', {
+                                    id: article.id
+                                }) }}">
+                                    <span class="fa fa-trash-alt text-danger"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <span class="fa fa-{{ article.isPublished ? 'check' : 'times' }} {{ article.isPublished ? 'text-success' : '' }}"></span>
                             </td>
                         </tr>
                     {% endfor %}
