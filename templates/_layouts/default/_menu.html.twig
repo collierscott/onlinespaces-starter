@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-md top-nav navbar-light bd-navbar">
+    <a class="navbar-brand header-logo" href="{{ path('home_page') }}">
+        <img alt="logo" class="header-logo-img" src="{{ asset('build/images/onlinespaces__logo--44x44.png') }}"></a>
+    <button class="navbar-toggler header-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        {{ knp_menu_render('main-menu', {'template': 'menu/top_menu.html.twig'}) }}
+        <div id="account-navbar" class="mt-2 mt-md-2 ml-auto">
+            <ul class="navbar-nav mr-auto">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('admin_home') }}">Admin</a>
+                    </li>
+                {% endif %}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('form_logout') }}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('form_login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('form_register') }}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
