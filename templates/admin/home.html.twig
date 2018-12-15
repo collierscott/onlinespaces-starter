@@ -9,7 +9,13 @@
                 <a href="{{ path('admin_article_list') }}">List Articles</a>
             </li>
             <li class="list-group-item">
-                <a href="{{ path('admin_article_new') }}">Add Article</a>
+                <a href="{{ path('admin_article_new') }}">Add an Article</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{{ path('admin_categories_list') }}">List Categories</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{{ path('admin_categories_new') }}">Add a Category</a>
             </li>
             <li class="list-group-item">
                 <a href="{{ path('admin_settings') }}">Settings</a>
@@ -17,6 +23,7 @@
             <li class="list-group-item">
                 <a href="{{ path('admin_site_settings') }}">Site Settings</a>
             </li>
+
         </ul>
     </div>
 {% endblock %}

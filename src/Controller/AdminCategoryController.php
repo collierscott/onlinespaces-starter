@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Category;
+use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+class AdminCategoryController extends AbstractController
+{
+    /**
+     * @Route("/admin/categories", name="admin_categories_list")
+     * @param CategoryRepository $repository
+     * @return Response
+     */
+    public function list(CategoryRepository $repository)
+    {
+        $categories = $repository->findAll();
+        $context['content'] = $categories;
+
+        return $this->render('admin/categories/list.html.twig', [
+            'context' => $context
+        ]);
+    }
+
+    /**
+     * @Route(path="/admin/categories/new", name="admin_categories_new"), methods={"GET", "POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function new(Request $request)
+    {
+        return $this->render('admin/categories/new.html.twig');
+    }
+
+    /**
+     * @Route(path="/admin/categories/{id}/edit", name="admin_categories_edit", methods={"GET", "POST"})
+     *
+     * @param Category $category
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function edit(Category $category, Request $request, EntityManagerInterface $em)
+    {
+        return $this->render('admin/categories/edit.html.twig');
+    }
+
+    /**
+     * @Route(path="/admin/categories/{id}/delete", name="admin_categories_delete", methods={"GET", "DELETE"})
+     *
+     * @param Category $category
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return RedirectResponse
+     */
+    public function delete(Category $category, Request $request, EntityManagerInterface $em)
+    {
+        return $this->redirectToRoute('admin_categories_list');
+    }
+}

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class ArticleAdminController extends AbstractController
+class AdminArticleController extends AbstractController
 {
     /**
      * @Route("/admin/articles/new", name="admin_article_new", methods={"GET", "POST"})
