@@ -1,10 +1,22 @@
-{% extends 'layouts/full_page_fluid.html.twig' %}
+{% extends '_layouts/default.html.twig' %}
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block body %}
     <div class="container">
         <h1>Admin Dashboard</h1>
-        <a href="{{ path('admin_article_list') }}">List Articles</a><br/>
-        <a href="{{ path('admin_article_new') }}">Add Article</a>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="{{ path('admin_article_list') }}">List Articles</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{{ path('admin_article_new') }}">Add Article</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{{ path('admin_settings') }}">Settings</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{{ path('admin_site_settings') }}">Site Settings</a>
+            </li>
+        </ul>
     </div>
 {% endblock %}
