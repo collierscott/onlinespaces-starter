@@ -40,12 +40,19 @@ class ApplicationMenuProvider implements MenuProviderInterface
     public function get($name, array $options = array())
     {
         $root = $this->find($name, true);
-
         $menu = $this->factory->createItem('root');
 
+        $menu->setAttributes([
+            'class' => 'nav nav-tabs border-0 flex-column flex-lg-row'
+        ]);
         /** @var MenuItem $item */
         foreach ($root->getChildren() as $item) {
-            $menu->addChild($item->getLabel(), ['route' => $item->getLink()]);
+            $menu->addChild($item->getLabel(), [
+                'route' => $item->getLink(),
+                'linkAttributes' => [
+                    'class' => 'nav-link'
+                ],
+            ]);
             // TODO Need to get all children and children of children if displaying children
             // TODO Should probably be able to set max depth also
         }
