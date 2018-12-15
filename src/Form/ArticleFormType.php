@@ -8,6 +8,7 @@ use FM\ElfinderBundle\Form\Type\ElFinderType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,6 +33,12 @@ class ArticleFormType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'title'
+            ])
+            ->add('isPublished', ChoiceType::class, [
+                'choices' => [
+                    'Yes' => true,
+                    'No' => false,
+                ],
             ])
             ,
             $options
