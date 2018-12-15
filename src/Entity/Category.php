@@ -32,7 +32,7 @@ class Category implements NodeTypeInterface
 
     /**
      * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $slug;
 
@@ -52,10 +52,18 @@ class Category implements NodeTypeInterface
      */
     private $children;
 
+    /**
+     * @var boolean $isPublished
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublished;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->children = new ArrayCollection();
+        $this->isPublished = true;
     }
 
     public function getId(): ?int
@@ -158,6 +166,24 @@ class Category implements NodeTypeInterface
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished(): bool
+    {
+        return $this->isPublished;
+    }
+
+    /**
+     * @param bool $isPublished
+     * @return Category
+     */
+    public function setIsPublished(bool $isPublished): Category
+    {
+        $this->isPublished = $isPublished;
         return $this;
     }
 }

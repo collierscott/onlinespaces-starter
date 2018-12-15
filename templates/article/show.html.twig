@@ -1,7 +1,7 @@
-{% extends 'layouts/full_page_fluid.html.twig' %}
+{% extends '_layouts/default.html.twig' %}
 {% set article = context['content'] %}
 
-{% block title %}Articles{% endblock %}
+{% block title %}{{ onl_render_title(settings, page) }} - {{ article.title }}{% endblock %}
 
 {% block body %}
     <div class="container">

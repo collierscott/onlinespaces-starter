@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_start(form) }}
+                {{ form_errors(form) }}
+                {{ form_row(form.title, {
+                    label: 'Category title'
+                }) }}
+                {{ form_row(form.slug, {
+                    label: 'Alias'
+                }) }}
+            <div class="text-right">
+                <a href="{{ path('admin_categories_list') }}" type="button" class="btn btn-danger">Cancel</a>
+                <button type="submit" class="btn btn-primary">{{ button_text }}</button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.isPublished) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
