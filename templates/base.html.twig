@@ -23,7 +23,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--<title>{% block title %}{{ onl_render_title(settings, page) }}{% endblock %}</title>//-->
+        <title>{% block title %}{{ onl_render_title(settings, page) }}{% endblock %}</title>
         <!-- SEO Info -->
         {% if settings is defined and page is defined %}
             {{ onl_render_seo_metadata(settings, page) }}
@@ -116,9 +116,7 @@
         {% endblock %}
         {% block javascripts %}
             {#<script src="{{ asset('build/vendors~app.js') }}"></script>#}
-            <script src="{{ asset('build/app.js') }}"></script>
-            <script src="{{ asset('build/runtime.js') }}"></script>
         {% endblock %}
+        {{ encore_entry_script_tags('app') }}
     </body>
 </html>
-

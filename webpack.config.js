@@ -29,6 +29,7 @@ Encore
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
     // .enableReactPreset()
+    //.addEntry('admin', './assets/js/admin.js')
 
     /*
      * FEATURE CONFIG
@@ -91,4 +92,9 @@ Encore
         pattern: /\.(ico)$/
     });
 
-module.exports = Encore.getWebpackConfig();
+//module.exports = Encore.getWebpackConfig();
+
+let config = Encore.getWebpackConfig();
+config.watchOptions = { poll: true, ignored: /node_modules/ };
+
+module.exports = [config];
