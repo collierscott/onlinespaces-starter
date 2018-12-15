@@ -32,7 +32,7 @@ class Category implements NodeTypeInterface
 
     /**
      * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $slug;
 
