@@ -1,1 +1,16 @@
 {% extends '_layouts/default.html.twig' %}
+
+{% block title %}Edit Category{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Edit Category</h1>
+        {{ include('admin/categories/_form.html.twig', {
+            button_text: 'Update'
+        }) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
