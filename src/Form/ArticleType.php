@@ -42,10 +42,10 @@ class ArticleType extends AbstractType
                 ],
             ])
             ->add('publishedStartAt', DateTimeType::class, array(
-                'label' => 'Start Publishing',
+                'date_label' => 'Start Publishing',
             ))
             ->add('publishedEndAt', DateTimeType::class, array(
-                'label' => 'Stop Publishing',
+                'date_label' => 'Stop Publishing',
             ))
             ,
             $options
