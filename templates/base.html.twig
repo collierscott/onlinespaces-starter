@@ -47,7 +47,7 @@
                 {% block top_navigation %}{% endblock %}
             </div>
         </header>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row flex-xl-nowrap">
                 <div class="col-12">
                     {% block featured_top %}{% endblock %}
@@ -115,7 +115,6 @@
             </footer>
         {% endblock %}
         {% block javascripts %}
-            {#<script src="{{ asset('build/vendors~app.js') }}"></script>#}
         {% endblock %}
         {{ encore_entry_script_tags('app') }}
     </body>
