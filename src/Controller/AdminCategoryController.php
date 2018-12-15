@@ -63,7 +63,23 @@ class AdminCategoryController extends AbstractController
      */
     public function edit(Category $category, Request $request, EntityManagerInterface $em)
     {
-        return $this->render('admin/categories/edit.html.twig');
+        if(!$category) {
+            $this->addFlash('danger', 'The category does not exist.');
+            return $this->redirectToRoute('admin_categories_list');
+        }
+
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'The category has been updated.');
+            return $this->redirectToRoute('admin_categories_list');
+        }
+
+        return $this->render('admin/categories/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
@@ -76,6 +92,9 @@ class AdminCategoryController extends AbstractController
      */
     public function delete(Category $category, Request $request, EntityManagerInterface $em)
     {
+        $em->remove($category);
+        $em->flush();
+        $this->addFlash('success', 'The category has been deleted.');
         return $this->redirectToRoute('admin_categories_list');
     }
 }
