@@ -16,7 +16,7 @@ class HomeController extends PageController
     {
         //$this->addFlash('error', 'Testing');
         $context['settings'] = $this->settings;
-        $context['content'] = $repository->findAll();
+        $context['content'] = $repository->findAllPublishedOrderByCreated();
         return $this->render('home/index.html.twig', [
             'context' => $context,
         ]);
