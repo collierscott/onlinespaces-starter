@@ -26,7 +26,7 @@ class AbstractPage implements ContentInterface
      *
      * @ORM\Column(type="text", name="summary")
      */
-    private $summary;
+    protected $summary;
 
     /**
      * @var string $slug
