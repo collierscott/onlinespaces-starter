@@ -80,6 +80,12 @@ class MenuItem implements NodeInterface
      */
     private $children;
 
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $icon;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -278,5 +284,23 @@ class MenuItem implements NodeInterface
             'sort-order' => $this->getSortOrder(),
             'display-children' => $this->getIsDisplayedChildren(),
         ];
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @param string|null $icon
+     * @return MenuItem
+     */
+    public function setIcon(?string $icon): MenuItem
+    {
+        $this->icon = $icon;
+        return $this;
     }
 }
