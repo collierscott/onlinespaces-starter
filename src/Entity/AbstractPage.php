@@ -26,7 +26,7 @@ class AbstractPage implements ContentInterface
      *
      * @ORM\Column(type="text", name="summary")
      */
-    private $summary;
+    protected $summary;
 
     /**
      * @var string $slug
@@ -99,7 +99,7 @@ class AbstractPage implements ContentInterface
     /**
      * @return string
      */
-    public function getSummary(): string
+    public function getSummary(): ?string
     {
         return $this->summary;
     }
@@ -128,7 +128,7 @@ class AbstractPage implements ContentInterface
     /**
      * @return string
      */
-    public function getLanguage(): string
+    public function getLanguage(): ?string
     {
         return $this->language;
     }

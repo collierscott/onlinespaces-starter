@@ -22,7 +22,9 @@
 {% block list %}
     {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}
         {% import _self as knp_menu %}
-        {%- set classes = item.attribute('class') is not empty ? [item.attribute('class'), 'navbar-nav'] : ['navbar-nav'] %}
+        {%- set classes = item.attribute('class') is not empty ?
+            [item.attribute('class'), 'navbar-nav'] :
+            ['navbar-nav'] %}
         {%- set listAttributes = listAttributes|merge({'class': classes|join(' ')}) %}
         <ul {{ knp_menu.attributes(listAttributes) }}>
             {{ block('children') }}

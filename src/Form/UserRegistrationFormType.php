@@ -42,13 +42,14 @@ class UserRegistrationFormType extends AbstractType
                         ]),
                         new Length([
                             'min' => 5,
-                            'minMessage' => 'THe password must contain at least 5 characters.'
+                            'minMessage' => 'The password must contain at least 5 characters.'
                         ])
                     ]
                 ]
             )
             ->add('agreeTerms', CheckboxType::class, [
                     'mapped' => false,
+                    'label' => 'Agree to the Terms and Policies',
                     'constraints' => [
                         new IsTrue([
                             'message' => 'You must agree to the terms.'

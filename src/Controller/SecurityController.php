@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class SecurityController extends AbstractController
+class SecurityController extends PageController
 {
     /**
      * @Route("/login", name="form_login")
@@ -72,16 +72,9 @@ class SecurityController extends AbstractController
             $mailer->sendConfirmationEmail($user);
 
             return $this->redirectToRoute('please_confirm_email');
-
-//            return $guardHandler->authenticateUserAndHandleSuccess(
-//                $user,
-//                $request,
-//                $formAuthenticator,
-//                'main'
-//            );
         }
         return $this->render('security/register.html.twig', [
-            'registrationForm' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 
@@ -106,7 +99,10 @@ class SecurityController extends AbstractController
      */
     public function confirm()
     {
-        return $this->render('security/confirm.html.twig');
+        $context['settings'] = $this->settings;
+        return $this->render('security/confirm.html.twig', [
+            'context' => $context,
+        ]);
     }
 
     /**

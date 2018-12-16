@@ -1,22 +1,24 @@
-{% extends '_layouts/default.html.twig' %}
+{% extends '_layouts/single_page/single_page.html.twig' %}
 
 {% block title %}Register!{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                {{ form_start(registrationForm, {
-                    'attr': {'class': 'form-signin'}
-                }) }}
-                <h1 class="h3 mb-3 font-weight-normal">Register</h1>
-                {{ form_widget(registrationForm) }}
-
-                <button class="btn btn-lg btn-primary btn-block" type="submit">
-                    Register
-                </button>
-                {{ form_end(registrationForm) }}
+{% block content %}
+    {{ form_start(form, {
+        'attr': {'class': 'card'}
+    }) }}
+        <div class="card-body p-6">
+            <div class="card-title">Create new account</div>
+            {{ form_row(form.username) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.plainPassword) }}
+            {{ form_row(form.agreeTerms) }}
+            <span><a href="terms.html">Terms and Policies</a></span>
+            <div class="form-footer">
+                <button type="submit" class="btn btn-primary btn-block">Create new account</button>
             </div>
         </div>
+    {{ form_end(form) }}
+    <div class="text-center text-muted">
+        Already have account? <a href="{{ path('form_login') }}">Sign in</a>
     </div>
 {% endblock %}

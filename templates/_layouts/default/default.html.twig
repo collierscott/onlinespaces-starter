@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block layout %}
+    <div class="flex-fill">
+        {% include '_layouts/default/_header.html.twig' %}
+        <div class="my-1 my-md-2">
+            {% if page is defined and page.page_title is defined %}
+                <div class="container">
+                    <div class="page-header">
+                        <h1 class="page-title">{{ page.page_title }}</h1>
+                    </div>
+                </div>
+            {% endif %}
+            {% block breadcrumb %}{% endblock %}
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    {% include '_layouts/default/_subfooter.html.twig' %}
+    {% include '_layouts/default/_footer.html.twig' %}
+{% endblock %}
