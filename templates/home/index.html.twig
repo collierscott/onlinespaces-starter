@@ -1,17 +1,36 @@
 {% extends '_layouts/default/default.html.twig' %}
 
-{% block title %}Welcome to ...!{% endblock %}
+{% block title %}Welcome to Onlinespaces!{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1>Welcome to ...! ✅</h1>
-    <ul>
-        <li><a href="{{ path('form_register') }}">Register</a> </li>
-        <li><a href="{{ path('form_login') }}">Login</a></li>
-        <li><a href="{{ path('form_logout') }}">Logout</a></li>
-        <li><a href="{{ path('article_list') }}">Articles</a></li>
-    </ul>
-</div>
+    <div class="container">
+        <div class="row row-cards row-deck">
+
+            {% for article in context['content'] | slice(0, 4) %}
+                <div class="col-sm-6 col-xl-3">
+                    {% include '_components/_cards/_blog_single.html.twig' with { 'article': article, 'type': 'image', 'truncate': 200} %}
+                </div>
+            {% endfor %}
+
+            {% for article in context['content'] | slice(3, 4) %}
+                <div class="col-lg-4">
+                    {% include '_components/_cards/_blog_single.html.twig' with { 'article': article, 'id': article.id, 'truncate': 200 } %}
+                </div>
+            {% endfor %}
+
+            {% for article in context['content'] | slice(0, 2) %}
+                <div class="col-lg-6">
+                    {% include '_components/_cards/_blog_single.html.twig' with { 'article': article, 'type': 'aside', 'truncate': 200} %}
+                </div>
+            {% endfor %}
+
+            {% for article in context['content'] | slice(2, 4) %}
+                <div class="col-lg-6">
+                    {% include '_components/_cards/_blog_single.html.twig' with { 'article': article, 'type': 'aside', 'truncate': 200} %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
