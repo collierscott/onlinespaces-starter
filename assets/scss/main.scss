@@ -18,6 +18,7 @@ $fa-font-path:   "~@fortawesome/fontawesome-pro/webfonts";
 @import './assets/scss/partials/header';*/
 
 // Styles
+@import "./_partials/core";
 @import "./_partials/layout";
 @import "./_partials/grid";
 @import "./_partials/avatars";
