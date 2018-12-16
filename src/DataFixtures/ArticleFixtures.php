@@ -21,10 +21,11 @@ class ArticleFixtures extends BaseFixture implements DependentFixtureInterface
         $this->createMany(10, 'main_articles', function($count) use ($manager) {
             $paragraphs = $this->faker->paragraphs(4,false);
             $content = "<p>" . implode("</p><p>", $paragraphs) . "</p>";
+            $summary = implode(" ", $paragraphs);
             $article = new Article();
             $article->setTitle($this->faker->sentence(4, true));
             $article->setContent($content);
-            $article->setIntroContent(substr(implode("", $paragraphs), 0, 150));
+            $article->setSummary(substr(implode("", $paragraphs), 0, 150));
 
             // publish most articles
             if ($this->faker->boolean(70)) {

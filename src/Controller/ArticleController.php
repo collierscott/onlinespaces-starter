@@ -16,7 +16,7 @@ class ArticleController extends PageController
      */
     public function list(ArticleRepository $repository)
     {
-        $content = $repository->findAll();
+        $content = $repository->findAllPublishedOrderByCreated();
         $context['content'] = $content;
         $context['settings'] = $this->settings;
 

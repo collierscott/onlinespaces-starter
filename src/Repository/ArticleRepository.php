@@ -19,9 +19,26 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    // /**
-    //  * @return Article[] Returns an array of Article objects
-    //  */
+    public function findAllPublishedOrderByCreated($limit = 0)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->andWhere('a.isPublished = :val')
+            ->setParameter('val', 1)
+            ->orderBy('a.createdAt', 'DESC');
+
+        if($limit > 0) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+     /**
+      * @return Article[] Returns an array of Article objects
+      */
     /*
     public function findByExampleField($value)
     {

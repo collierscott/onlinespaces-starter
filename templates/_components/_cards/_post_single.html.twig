@@ -1,0 +1,36 @@
+{#{% assign article = include.article | default: site.data.articles[0] %}#}
+{% set type = type | default('none') %}
+{% set truncate = truncate | default(100) %}
+{% set summary = not article.summary ? article.content : article.summary %}
+{#{% assign author = site.data.users[article.author] %}#}
+{#{% assign liked = include.liked | default: false %}#}
+{#{% assign truncate = include.truncate | default: 100 %}#}
+
+<div class="card{% if type == 'aside' %} card-aside{% endif %}">
+    {% if type == 'image' %}
+        <a href="{{ path('article_show', {'slug': article.slug})  }}">
+            <img class="card-img-top img-responsive" src="{{ article.coverImage }}" alt="{{ article.title | escape}}">
+        </a>
+    {% endif %}
+
+    {% if type == 'aside' %}
+        <a href="#" class="card-aside-column" style="background-image: url({{ article.coverImage }})"></a>
+    {% endif %}
+
+    <div class="card-body d-flex flex-column">
+        <h4><a href="{{ path('article_show', {'slug': article.slug }) }}">{{ article.title }}</a></h4>
+        <div class="text-muted card-subtitle mt-1">{{ article.category.title }}</div>
+        <div class="text-muted">{{ summary | slice(0, truncate) }}</div>
+
+        <div class="d-flex align-items-center pt-5 mt-auto">
+            <div class="avatar avatar-md mr-3" style="background-image: url({{ asset('build/images/user.png') }})"></div>
+            <div>
+                <a href="{{ path('article_show', {'slug': article.slug }) }}" class="text-default">{{ article.author.username }}</a>
+                <small class="d-block text-muted">{{ article.createdAt | date("m/d/Y")}}</small>
+            </div>
+            <div class="ml-auto text-muted">
+                <a href="javascript:void(0)" class="icon d-none d-md-inline-block ml-3"><i class="fe fe-heart mr-1"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
