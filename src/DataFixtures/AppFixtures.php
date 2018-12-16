@@ -21,10 +21,21 @@ class AppFixtures extends Fixture
         $manager->persist($menu);
 
         $item = new MenuItem();
-        $item->setName('child-one');
+        $item->setName('home');
         $item->setMenu($menu);
         $item->setLabel('Home');
         $item->setLink('home_page');
+        $item->setIcon('fal fa-home');
+        $item->setSortOrder(1);
+        $manager->persist($item);
+
+        $item = new MenuItem();
+        $item->setName('articles');
+        $item->setMenu($menu);
+        $item->setLabel('Articles');
+        $item->setLink('article_list');
+        $item->setIcon('fal fa-file');
+        $item->setSortOrder(2);
         $manager->persist($item);
 
         $manager->flush();
