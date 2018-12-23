@@ -24,6 +24,7 @@ label: 'Password'
             <div class="text-right">
                 <a href="{{ path('home_page') }}" type="button" class="btn btn-danger">Cancel</a>
                 <button type="submit" class="btn btn-primary">{{ button_text }}</button>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('user_profile') }}">
             </div>
         </div>
         {{ form_end(form) }}

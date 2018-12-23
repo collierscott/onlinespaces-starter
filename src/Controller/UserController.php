@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Security\LoginFormAuthenticator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class UserController extends AbstractController
 {
@@ -17,9 +19,18 @@ class UserController extends AbstractController
      * @param Request $request
      * @param User $user
      * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param GuardAuthenticatorHandler $guardHandler
+     * @param LoginFormAuthenticator $formAuthenticator
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
-    public function profile(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder)
+    public function profile(
+        Request $request,
+        User $user,
+        UserPasswordEncoderInterface $passwordEncoder,
+        GuardAuthenticatorHandler $guardHandler,
+        LoginFormAuthenticator $formAuthenticator
+    )
     {
         if(
             !$this->isGranted('IS_AUTHENTICATED_FULLY') ||
@@ -32,6 +43,8 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+
+            /** @var User $user */
             $user = $form->getData();
 
             if(!$passwordEncoder->isPasswordValid($user, $form['originalPassword']->getData())) {
@@ -46,15 +59,19 @@ class UserController extends AbstractController
                 $form['plainPassword']->getData()
             ));
 
+            $user->setUpdatedAt(new \DateTime("now"));
+
             $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
             $em->flush();
 
             $this->addFlash('success', 'Your profile has been updated.');
 
-            return $this->render('user/index.html.twig', [
-                'form' => $form->createView(),
-            ]);
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $formAuthenticator,
+                'main'
+            );
         }
 
         return $this->render('user/index.html.twig', [
