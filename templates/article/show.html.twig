@@ -5,7 +5,7 @@
 
 {% block body %}
      <div class="container">
-         {% include '_components/_page-title.html.twig' with { 'title': article.title } %}
+         {% include '_layouts/components/_page-title.html.twig' with { 'title': article.title } %}
          <div class="d-flex align-items-center mt-auto pb-2">
              <div class="avatar avatar-md mr-3" style="background-image: url({{ asset('build/images/user.png') }})"></div>
              <div>

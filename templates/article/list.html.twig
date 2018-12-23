@@ -8,7 +8,7 @@
         <div class="row row-cards row-deck">
             {% for article in context['content'] | slice(0, 2) %}
                 <div class="col-lg-6">
-                    {% include '_components/_cards/_post_single.html.twig' with { 'article': article, 'type': 'aside', 'truncate': 200} %}
+                    {% include '_layouts/components/cards/_post_single.html.twig' with { 'article': article, 'type': 'aside', 'truncate': 200} %}
                 </div>
             {% endfor %}
         </div>
