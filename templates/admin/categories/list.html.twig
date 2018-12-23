@@ -1,5 +1,13 @@
 {% extends '_layouts/default/default.html.twig' %}
 {% set categories = context['content'] %}
+{%  set crumbs = [
+    {title: 'Admin Home', path: 'admin_home'},
+    {title: 'Categories', active: true}
+]
+%}
+{% block breadcrumb %}
+    {% include '_layouts/components/_breadcrumb.html.twig' with {'crumbs': crumbs } %}
+{% endblock %}
 {% block title %}Categories{% endblock %}
 
 {% block body %}

@@ -1,7 +1,20 @@
 {% extends '_layouts/default/default.html.twig' %}
-
+{%  set crumbs = [
+    {title: 'Admin Home', path: 'admin_home'},
+    {title: 'Site Settings', active: true}
+]
+%}
+{% block breadcrumb %}
+    {% include '_layouts/components/_breadcrumb.html.twig' with {'crumbs': crumbs } %}
+{% endblock %}
 {% block title %}Site Settings{% endblock %}
 
 {% block body %}
-    {{ include('admin/settings/_form.html.twig') }}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {{ include('admin/settings/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

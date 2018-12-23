@@ -1,5 +1,12 @@
 {% extends '_layouts/default/default.html.twig' %}
-
+{%  set crumbs = [
+    {title: 'Admin Home', path: 'admin_home'},
+    {title: 'Edit Category', active: true}
+]
+%}
+{% block breadcrumb %}
+    {% include '_layouts/components/_breadcrumb.html.twig' with {'crumbs': crumbs } %}
+{% endblock %}
 {% block title %}Edit Category{% endblock %}
 
 {% block body %}
