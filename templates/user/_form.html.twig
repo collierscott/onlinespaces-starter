@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {{ form_row(form.username, {
+                label: 'Username'
+            }) }}
+            {{ form_row(form.email, {
+                label: 'Email'
+            }) }}
+            {{ form_row(form.firstName, {
+                label: 'First Name'
+            }) }}
+            {{ form_row(form.lastName, {
+                label: 'Last Name'
+            }) }}
+            {{ form_row(form.originalPassword, {
+label: 'Password'
+            }) }}
+            {{ form_row(form.plainPassword, {
+                label: 'Password'
+            }) }}
+            <div class="text-right">
+                <a href="{{ path('home_page') }}" type="button" class="btn btn-danger">Cancel</a>
+                <button type="submit" class="btn btn-primary">{{ button_text }}</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
