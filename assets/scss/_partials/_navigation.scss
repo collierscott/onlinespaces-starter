@@ -17,6 +17,14 @@
   }
 }
 
+.nav-item {
+    &.active {
+      border-color: $blue;
+      color: $blue;
+      background: transparent;
+    }
+}
+
 .nav-tabs {
   user-select: none;
   color: $text-muted;

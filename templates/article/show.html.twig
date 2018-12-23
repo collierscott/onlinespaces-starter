@@ -3,7 +3,7 @@
 
 {% block title %}{{ onl_render_title(settings, page) }} - {{ article.title }}{% endblock %}
 
-{% block content %}
+{% block body %}
      <div class="container">
          {% include '_components/_page-title.html.twig' with { 'title': article.title } %}
          <div class="d-flex align-items-center mt-auto pb-2">
