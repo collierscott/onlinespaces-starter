@@ -34,7 +34,7 @@ class UserController extends AbstractController
     {
         if(
             !$this->isGranted('IS_AUTHENTICATED_FULLY') ||
-            !$user->getId() === $this->getUser()->getId()
+            $user->getId() !== $this->getUser()->getId()
         ) {
             return $this->redirectToRoute('home_page');
         }
