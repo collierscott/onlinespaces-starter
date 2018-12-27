@@ -33,6 +33,10 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message="Please enter an username")
+     * @Assert\Length(
+     *      min = 3,
+     *      minMessage = "Your username must be at least {{ limit }} characters long",
+     * )
      */
     private $username;
 
