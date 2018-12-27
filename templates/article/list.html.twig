@@ -6,7 +6,7 @@
     <div class="container">
         <h1>Articles</h1>
         <div class="row row-cards row-deck">
-            {% for article in context['content'] | slice(0, 2) %}
+            {% for article in context['content'] %}
                 <div class="col-lg-6">
                     {% include '_layouts/components/cards/_post_single.html.twig' with { 'article': article, 'type': 'aside', 'truncate': 200} %}
                 </div>
