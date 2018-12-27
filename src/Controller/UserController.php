@@ -43,24 +43,26 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-
             /** @var User $user */
             $user = $form->getData();
+            $plainPassword = $form['plainPassword']->getData();
+            $originalPassword = $form['originalPassword']->getData();
 
-            if(!$passwordEncoder->isPasswordValid($user, $form['originalPassword']->getData())) {
-                $this->addFlash('error', 'The password you entered is not your current password.');
+            if(empty($originalPassword) || !$passwordEncoder->isPasswordValid($user, $originalPassword)) {
+                $this->addFlash('error', 'You must enter your current password to update your profile.');
                 return $this->render('user/index.html.twig', [
                     'form' => $form->createView(),
                 ]);
+            } else {
+                if(!empty($plainPassword)) {
+                    $user->setPassword($passwordEncoder->encodePassword(
+                        $user,
+                        $plainPassword
+                    ));
+                }
             }
 
-            $user->setPassword($passwordEncoder->encodePassword(
-                $user,
-                $form['plainPassword']->getData()
-            ));
-
             $user->setUpdatedAt(new \DateTime("now"));
-
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
