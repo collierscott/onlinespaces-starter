@@ -8,7 +8,8 @@
         <div class="row row-cards row-deck">
             {% for article in context['content'] %}
                 <div class="col-lg-6">
-                    {% include '_layouts/components/cards/_post_single.html.twig' with { 'article': article, 'type': 'aside', 'truncate': 200} %}
+                    {% set type = article.coverImage is defined ? 'aside' : ''  %}
+                    {% include '_layouts/components/cards/_post_single.html.twig' with { 'article': article, 'type': type, 'truncate': 200} %}
                 </div>
             {% endfor %}
         </div>

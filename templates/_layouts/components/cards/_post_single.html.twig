@@ -14,7 +14,7 @@
     {% endif %}
 
     {% if type == 'aside' %}
-        <a href="#" class="card-aside-column" style="background-image: url({{ article.coverImage }})"></a>
+        <a href="#" class="card-aside-column" style="background-image: url({{ article.coverImage | replace({'\\': '\/'})}})"></a>
     {% endif %}
 
     <div class="card-body d-flex flex-column">
