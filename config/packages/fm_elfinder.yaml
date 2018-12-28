@@ -1,5 +1,5 @@
 fm_elfinder:
-    assets_path: /bundles/elfinder
+    assets_path: /assets
     instances:
         default:
             locale: '%locale%'
@@ -39,7 +39,7 @@ fm_elfinder:
                 roots:
                     uploads:
                         driver: LocalFileSystem
-                        path: uploads
+                        path: uploads/images
                         upload_allow: ['image/png', 'image/jpg', 'image/jpeg', 'image/svg', 'image/gif']
                         upload_deny: ['all']
                         upload_max_size: 8M
