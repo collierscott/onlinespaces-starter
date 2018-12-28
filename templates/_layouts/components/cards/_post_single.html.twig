@@ -8,9 +8,11 @@
 
 <div class="card{% if type == 'aside' %} card-aside{% endif %}">
     {% if type == 'image' %}
-        <a href="{{ path('article_show', {'slug': article.slug})  }}">
-            <img class="card-img-top img-responsive" src="{{ article.coverImage }}" alt="{{ article.title | escape}}">
-        </a>
+        <div class="card-image-wrapper">
+            <a href="{{ path('article_show', {'slug': article.slug})  }}">
+                <img class="card-img-top img-responsive" src="{{ article.coverImage }}" alt="{{ article.title | escape}}">
+            </a>
+        </div>
     {% endif %}
 
     {% if type == 'aside' %}
