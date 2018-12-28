@@ -69,12 +69,19 @@ class UserController extends AbstractController
             /** @var AvatarImage $avatar */
             $avatar = $form['avatar']->getData();
             $file = $avatar->getFile();
-            $avatar->setUrl($file->getFilename());
-            $em->persist($avatar);
-            $em->flush();
-            // dd($avatar);
 
-            $user->setAvatar($avatar);
+            if($file) {
+                $avatar->setUrl($file->getFilename());
+                $em->persist($avatar);
+                $em->flush();
+                $user->setAvatar($avatar);
+            } else {
+                $user->setAvatar(null);
+                $em->remove($avatar);
+                $avatar = null;
+            }
+
+            // dd($avatar);
             $user->setUpdatedAt(new \DateTime("now"));
 
             $em->flush();
