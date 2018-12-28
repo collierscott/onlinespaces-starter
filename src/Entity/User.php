@@ -9,8 +9,6 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -20,10 +18,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *     fields={"email", "username"},
  *     message="This email is already registered."
  * )
- *
- * @Vich\Uploadable()
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     use TimestampableEntity;
 
@@ -102,25 +98,6 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author")
      */
     private $articles;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=255)
-     */
-    private $profileImageUrl;
-
-    /**
-     * @Vich\UploadableField(mapping="user_image", fileNameProperty="profileImageUrl")
-     * @var File
-     */
-    private $profileImageFile;
-
-    /**
-     * @ORM\Column(type="integer")
-     *
-     * @var integer
-     */
-    private $profileImageSize;
 
     /**
      * User constructor.
@@ -357,48 +334,47 @@ class User implements UserInterface
     }
 
     /**
-     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-     * of 'UploadedFile' is injected into this setter to trigger the update. If this
-     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
-     * must be able to accept an instance of 'File' as the bundle will inject one here
-     * during Doctrine hydration.
-     *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $imageFile
-     * @throws \Exception
+     * String representation of object
+     * @link https://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
      */
-    public function setProfileImageFile(?File $imageFile = null): void
+    public function serialize()
     {
-        $this->profileImageFile = $imageFile;
-
-        if (null !== $imageFile) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
-        }
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->email,
+            $this->isEnabled,
+            $this->isConfirmed,
+            $this->isDeleted,
+            // see section on salt below
+            // $this->salt,
+        ));
     }
 
-    public function getProfileImageFile(): ?File
+    /**
+     * Constructs the object
+     * @link https://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
     {
-        return $this->profileImageFile;
-    }
-
-    public function setProfileImageUrl(?string $imageUrl): void
-    {
-        $this->profileImageUrl = $imageUrl;
-    }
-
-    public function getProfileImageUrl(): ?string
-    {
-        return $this->profileImageUrl;
-    }
-
-    public function setProfileImageSize(?int $imageSize): void
-    {
-        $this->profileImageSize = $imageSize;
-    }
-
-    public function getProfileImageSize (): ?int
-    {
-        return $this->profileImageSize ;
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->email,
+            $this->isEnabled,
+            $this->isConfirmed,
+            $this->isDeleted,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized, array('allowed_classes' => false));
     }
 }

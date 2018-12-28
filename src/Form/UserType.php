@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class UserType extends AbstractType
 {
@@ -18,7 +17,6 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('profileImageFile', VichFileType::class)
             ->add('originalPassword', PasswordType::class, array(
                     'label' => 'Current Password',
                     'mapped' => false,
