@@ -27,6 +27,7 @@ class ArticleType extends AbstractType
                     'label' => 'Featured Image',
                     'instance' => 'single_file',
                     'enable' => true,
+                    'required' => false,
                 ])
             ->add('content', CKEditorType::class, array(
                 'attr' => array('id' => 'editor', 'rows' => 20)
