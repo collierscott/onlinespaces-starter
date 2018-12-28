@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\AvatarImage;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Security\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -44,6 +46,7 @@ class UserController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             /** @var User $user */
             $user = $form->getData();
+
             $plainPassword = $form['plainPassword']->getData();
             $originalPassword = $form['originalPassword']->getData();
 
@@ -61,10 +64,20 @@ class UserController extends AbstractController
                 }
             }
 
-            $user->setUpdatedAt(new \DateTime("now"));
             $em = $this->getDoctrine()->getManager();
-            $em->flush();
 
+            /** @var AvatarImage $avatar */
+            $avatar = $form['avatar']->getData();
+            $file = $avatar->getFile();
+            $avatar->setUrl($file->getFilename());
+            $em->persist($avatar);
+            $em->flush();
+            // dd($avatar);
+
+            $user->setAvatar($avatar);
+            $user->setUpdatedAt(new \DateTime("now"));
+
+            $em->flush();
             $this->addFlash('success', 'Your profile has been updated.');
 
             return $guardHandler->authenticateUserAndHandleSuccess(

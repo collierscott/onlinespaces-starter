@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\ProfileImage;
+use App\Entity\AvatarImage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,12 +11,12 @@ use Vich\UploaderBundle\Form\Type\VichFileType;
 /**
  * Class ProfileImageType
  */
-class ProfileImageType extends AbstractType
+class AvatarImageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('file', VichFileType::class, [
-            'label' => 'Please select an image',
+            'label' => '',
             'required' => false
         ]);
     }
@@ -24,7 +24,7 @@ class ProfileImageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ProfileImage::class,
+            'data_class' => AvatarImage::class,
             'csrf_protection' => false
         ]);
     }

@@ -13,14 +13,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @ORM\Entity
  * @Vich\Uploadable()
  */
-class ProfileImage
+class AvatarImage
 {
     use TimestampableEntity;
     /**
      * @var int
      *
      * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -85,7 +85,7 @@ class ProfileImage
      */
     public function getUrl(): string
     {
-        return '/images/' . $this->url;
+        return $this->url;
     }
 
     /**
@@ -96,8 +96,8 @@ class ProfileImage
         $this->url = $url;
     }
 
-    public function __toString(): string
-    {
-        return $this->id . ':' . $this->url;
-    }
+//    public function __toString(): string
+//    {
+//        return $this->id . ':' . $this->url;
+//    }
 }
