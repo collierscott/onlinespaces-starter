@@ -17,6 +17,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username')
+            ->add('avatar', AvatarImageType::class)
             ->add('originalPassword', PasswordType::class, array(
                     'label' => 'Current Password',
                     'mapped' => false,

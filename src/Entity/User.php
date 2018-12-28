@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use App\Entity\AvatarImage;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -98,6 +100,11 @@ class User implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author")
      */
     private $articles;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\AvatarImage", cascade={"persist", "remove"})
+     */
+    private $avatar;
 
     /**
      * User constructor.
@@ -376,5 +383,17 @@ class User implements UserInterface, \Serializable
             // see section on salt below
             // $this->salt
             ) = unserialize($serialized, array('allowed_classes' => false));
+    }
+
+    public function getAvatar(): ?AvatarImage
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?AvatarImage $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
     }
 }
