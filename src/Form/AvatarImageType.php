@@ -16,7 +16,7 @@ class AvatarImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('file', VichFileType::class, [
-            'label' => '',
+            'label' => ' ',
             'required' => false
         ]);
     }
