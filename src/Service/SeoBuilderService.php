@@ -101,7 +101,7 @@ class SeoBuilderService
             'SITE_NAME'
         );
 
-        $type= $this->getValue(
+        $type = $this->getValue(
             'type',
             'type',
             'SITE_TYPE'

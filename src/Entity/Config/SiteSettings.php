@@ -119,6 +119,12 @@ class SiteSettings
     private $facebookAppId;
 
     /**
+     * @var string|null
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $facebookPixelId;
+
+    /**
      * Find out the type of your object in the Action Type section of App Dashboard. Select the object and find its
      * og:type under Advanced. Once an object is published in a story its type can't be changed.
      *
@@ -351,6 +357,24 @@ class SiteSettings
     {
         $this->facebookAppId = $facebookAppId;
 
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFacebookPixelId(): ?string
+    {
+        return $this->facebookPixelId;
+    }
+
+    /**
+     * @param string|null $facebookPixelId
+     * @return SiteSettings
+     */
+    public function setFacebookPixelId(?string $facebookPixelId): SiteSettings
+    {
+        $this->facebookPixelId = $facebookPixelId;
         return $this;
     }
 
