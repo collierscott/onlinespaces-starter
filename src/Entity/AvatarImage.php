@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,11 +18,12 @@ class AvatarImage
 {
     use TimestampableEntity;
     /**
-     * @var int
+     * @var string
      *
      * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
     private $id;
 
@@ -46,14 +48,23 @@ class AvatarImage
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->id = Uuid::uuid4();
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId(string $id): void
+    {
+        $this->id = $id;
     }
 
     /**

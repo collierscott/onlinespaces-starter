@@ -7,11 +7,12 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Security\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
 class UserController extends AbstractController
 {
@@ -71,7 +72,9 @@ class UserController extends AbstractController
             $file = $avatar->getFile();
 
             if($file) {
+                $avatar->setId(Uuid::uuid4());
                 $avatar->setUrl($file->getFilename());
+                //dd($avatar);
                 $em->persist($avatar);
                 $em->flush();
                 $user->setAvatar($avatar);
