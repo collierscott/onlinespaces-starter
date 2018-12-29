@@ -18,7 +18,7 @@ class PageController extends AbstractController
     public function __construct(SiteSettingsRepository $repository)
     {
         /** @var SiteSettings $settings */
-        $settings = $repository->findOneBy(['id' => '1']);
+        $settings = $repository->findOneByMostRecentSettings();
 
         if(!$settings) {
             $settings = new SiteSettings();
