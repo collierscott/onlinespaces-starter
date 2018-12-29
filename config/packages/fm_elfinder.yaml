@@ -11,7 +11,7 @@ fm_elfinder:
                     upload.presave:
                         - Plugin.AutoResize.onUpLoadPreSave
                 plugins:
-                    AutoResize: # global resize options, applies to root which don't have his own resize configuraion
+                    AutoResize: # global resize options, applies to root which don't have his own resize configuration
                         enable: true
                         maxHeight: 750
                         quality: 95 # JPEG image save quality
