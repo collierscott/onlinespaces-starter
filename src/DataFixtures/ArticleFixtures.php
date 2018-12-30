@@ -12,8 +12,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 class ArticleFixtures extends BaseFixture implements DependentFixtureInterface
 {
     private static $articleImages = [
-        'uploads\296231_264895630198463_364530757_n.jpg',
-        'uploads\corgi_smiling.png',
+        'uploads\images\296231_264895630198463_364530757_n.jpg',
+        'uploads\images\corgi_smiling.png',
     ];
 
     protected function loadData(ObjectManager $manager)
@@ -31,6 +31,7 @@ class ArticleFixtures extends BaseFixture implements DependentFixtureInterface
             if ($this->faker->boolean(70)) {
                 $article->setPublishedStartAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
             }
+            $article->setIsPublished($this->faker->boolean(70));
 
             $article->setAuthor($this->getRandomReference('main_users'));
             $article->setCoverImage($this->faker->randomElement(self::$articleImages));

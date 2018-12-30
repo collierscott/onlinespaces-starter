@@ -101,10 +101,16 @@ class SeoBuilderService
             'SITE_NAME'
         );
 
-        $type= $this->getValue(
+        $type = $this->getValue(
             'type',
             'type',
             'SITE_TYPE'
+        );
+
+        $image = $this->getValue(
+            'defaultImage',
+            'defaultImage',
+            'DEFAULT_IMAGE'
         );
 
         $url = $this->url();
@@ -137,12 +143,21 @@ class SeoBuilderService
         $og->setType($type);
         $og->setUrl($url);
         $og->setSiteName($siteName);
+        $og->setImage($this->imageUrl() . '/' . $image);
+        $og->set('og:image:url', $this->imageUrl() . '/' . $image);
+        $og->set('og:image:secure_url', $this->imageUrl(true) . '/' . $image);
+
+        try {
+            list($width, $height, $type, $attr) = getimagesize(dirname(__DIR__) . '/../public/' . $image);
+            $og->set('og:image:width', $width);
+            $og->set('og:image:height', $height);
+            $og->set('og:image:type', image_type_to_mime_type($type));
+        } catch (\Exception $e) {
+        }
 
         if($this->settings->getFacebookAppId()) {
             $facebook->setAppId($this->settings->getFacebookAppId());
         }
-
-        //$og->setImage();
 
         if($this->settings->getFacebookProfileId()) {
             $facebook->setProfileId($this->settings->getFacebookProfileId());
@@ -215,16 +230,30 @@ class SeoBuilderService
     }
 
     /**
-     * @return string
-     */
+ * @return string
+ */
     private function url()
     {
         if(isset($_SERVER['HTTPS'])){
             $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
-        }
-        else{
+        } else {
             $protocol = 'http';
         }
         return $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    }
+
+    /**
+     * @param bool $secure
+     * @return string
+     */
+    private function imageUrl($secure = false)
+    {
+        $protocol = "http";
+
+        if($secure) {
+            $protocol = "https";
+        }
+
+        return $protocol . "://" . $_SERVER['HTTP_HOST'];
     }
 }

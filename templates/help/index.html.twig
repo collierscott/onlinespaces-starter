@@ -1,0 +1,18 @@
+{% extends '_layouts/default/default.html.twig' %}
+{%  set crumbs = [
+    {title: 'Home', path: 'home_page'},
+    {title: 'Help', active: true}
+]
+%}
+{% block breadcrumb %}
+    {% include '_layouts/components/_breadcrumb.html.twig' with {'crumbs': crumbs } %}
+{% endblock %}
+
+{% block title %}Help{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Help</h1>
+    <h2>Coming Soon</h2>
+</div>
+{% endblock %}

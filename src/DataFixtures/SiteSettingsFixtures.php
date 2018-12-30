@@ -7,23 +7,106 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class SiteSettingsFixtures extends BaseFixture
 {
+    private $settings;
+
+    public function __construct()
+    {
+        $this->settings = new SiteSettings();
+    }
+
     protected function loadData(ObjectManager $manager)
     {
-        $settings = new SiteSettings();
-        $settings->setDescription('This is a bootstrapper project');
-        $settings->setSiteName('Onlinespaces Bootstrapper');
-        $settings->setLanguage('en_US');
-        $settings->setContentType('website');
-        $settings->setFacebookAppId('123456');
-        $settings->setFacebookAdmins('@onlinespaces');
-        $settings->setFacebookPage('onlinespaces');
-        $settings->setFacebookProfileId('@onlinespaces');
-        $settings->setTwitterUsername('@onlinespaces');
-        $settings->setServerTimeZone('UTC');
-        $settings->setFacebookType('article');
-        $settings->setGoogleId('123456');
+        $setting = $this->getValue(
+            'siteDescription',
+            'SITE_DESCRIPTION'
+        );
+        $this->settings->setDescription($setting);
 
-        $manager->persist($settings);
+        $setting = $this->getValue(
+            'siteName',
+            'SITE_NAME'
+        );
+        $this->settings->setSiteName($setting);
+
+        $setting = $this->getValue(
+            'siteName',
+            'SITE_LANGUAGE'
+        );
+        $this->settings->setLanguage($setting);
+
+        $setting = $this->getValue(
+            'contentType',
+            'SITE_TYPE'
+        );
+        $this->settings->setContentType($setting);
+
+        $setting = $this->getValue(
+            'facebookAppId',
+            'FACEBOOK_APP_ID'
+        );
+        $this->settings->setFacebookAppId($setting);
+
+        $setting = $this->getValue(
+            'facebookPixelId',
+            'FACEBOOK_PIXEL_ID'
+        );
+        $this->settings->setFacebookPixelId($setting);
+
+        $setting = $this->getValue(
+            'facebookAdmins',
+            'FACEBOOK_ADMINS'
+        );
+        $this->settings->setFacebookAdmins($setting);
+
+        $setting = $this->getValue(
+            'facebookAdmins',
+            'FACEBOOK_PAGE'
+        );
+        $this->settings->setFacebookPage($setting);
+
+        $setting = $this->getValue(
+            'facebookProfileId',
+            'FACEBOOK_PROFILE_ID'
+        );
+        $this->settings->setFacebookProfileId($setting);
+
+        $setting = $this->getValue(
+            'facebookType',
+            'FACEBOOK_TYPE'
+        );
+        $this->settings->setFacebookType($setting);
+
+        $setting = $this->getValue(
+            'twitterUsername',
+            'TWITTER_USERNAME'
+        );
+        $this->settings->setTwitterUsername($setting);
+
+        $setting = $this->getValue(
+            'serverTimeZone',
+            'SERVER_TIME_ZONE'
+        );
+        $this->settings->setServerTimeZone($setting);
+
+        $setting = $this->getValue(
+            'googleId',
+            'GOOGLE_ANALYTICS_ID'
+        );
+        $this->settings->setGoogleId($setting);
+
+        $manager->persist($this->settings);
         $manager->flush();
+    }
+
+    private function getValue(
+        string $setting,
+        string $parameter
+    )
+    {
+//        if($this->settings && $this->settings->__get($setting)) {
+//            return $this->settings->__get($setting);
+//        }
+
+        return getenv($parameter) ? getenv($parameter) : null;
     }
 }
