@@ -184,6 +184,12 @@ class SiteSettings
      */
     private $layout;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    private $defaultImage;
+
     public function __construct()
     {
         $this->isSiteOffline = false;
@@ -197,6 +203,7 @@ class SiteSettings
         $this->facebookType = "website";
         $this->facebookTtl = 604800;
         $this->layout = "default";
+        $this->defaultImage = getenv('DEFAULT_IMAGE') ? getenv('DEFAULT_IMAGE') : 'uploads/default_image.jpg';
     }
 
     public function getId(): ?int
@@ -481,5 +488,23 @@ class SiteSettings
         }
 
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultImage(): ?string
+    {
+        return $this->defaultImage;
+    }
+
+    /**
+     * @param string $defaultImage
+     * @return SiteSettings
+     */
+    public function setDefaultImage(string $defaultImage): SiteSettings
+    {
+        $this->defaultImage = $defaultImage;
+        return $this;
     }
 }
