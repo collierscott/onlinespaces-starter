@@ -1,0 +1,39 @@
+.header {
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(0, 40, 100, 0.12);
+}
+
+.header-logo {
+  color: inherit;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  white-space: nowrap;
+  font-weight: 600;
+  padding: 0;
+  transition: .3s opacity;
+  line-height: 2rem;
+}
+
+.header-toggler {
+  width: 2rem;
+  height: 2rem;
+  position: relative;
+  color: $text-muted;
+
+  &:hover {
+    color: $text-muted-dark;
+  }
+}
+
+.header-toggler-icon {
+  position: absolute;
+  width: 1rem;
+  height: 2px;
+  color: inherit;
+  background: currentColor;
+  border-radius: 3px;
+  top: 50%;
+  left: 50%;
+  margin: -2px 0 0 -.5rem;
+  box-shadow: 0 5px currentColor, 0 -5px currentColor;
+}

@@ -1,0 +1,50 @@
+fm_elfinder:
+    assets_path: /assets
+    instances:
+        default:
+            locale: '%locale%'
+            editor: ckeditor
+            include_assets: true
+            relative_path: true
+            connector:
+                binds:
+                    upload.presave:
+                        - Plugin.AutoResize.onUpLoadPreSave
+                plugins:
+                    AutoResize: # global resize options, applies to root which don't have his own resize configuration
+                        enable: true
+                        maxHeight: 750
+                        quality: 95 # JPEG image save quality
+                roots:
+                    uploads:
+                        driver: LocalFileSystem
+                        path: uploads
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg', 'image/svg', 'image/gif']
+                        upload_deny: ['all']
+                        upload_max_size: 8M
+        single_file:
+            locale: '%locale%'
+            editor: form
+            include_assets: true
+            relative_path: true
+            connector:
+                binds:
+                    upload.presave:
+                        - Plugin.AutoResize.onUpLoadPreSave
+                plugins:
+                    AutoResize: # global resize options, applies to root which don't have his own resize configuration
+                        enable: true
+                        maxHeight: 750
+                        quality: 95 # JPEG image save quality
+                roots:
+                    uploads:
+                        driver: LocalFileSystem
+                        path: uploads/images
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg', 'image/svg', 'image/gif']
+                        upload_deny: ['all']
+                        upload_max_size: 8M
+                        plugins:
+                            AutoResize:
+                                enable: true # For control by volume driver
+                                maxHeight: 400 # Margin right pixel
+                                quality: 95 # JPEG image save quality

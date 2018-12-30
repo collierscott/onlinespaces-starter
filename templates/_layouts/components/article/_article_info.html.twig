@@ -1,0 +1,35 @@
+{% if article is defined %}
+    <div class="page-subtitle">
+        <dl class="article-info muted">
+            <dt class="article-info-term">
+                Details
+            </dt>
+            <dd class="createdby hasTooltip" itemprop="author" title="" data-original-title="Written by ">
+                <i class="fal fa-user"></i>
+                <a href="{{ path('article_show', {'slug': article.slug }) }}">
+                    <span itemprop="name">{{ article.author }}</span>
+                </a>
+                <meta itemprop="name" content="{{ article.author }}">
+            </dd>
+            <dd class="category-name hasTooltip" title="" data-original-title="Category: ">
+                <i class="fal fa-folder-open"></i>
+                <a href="{{ path('article_show', {'slug': article.slug }) }}"><span itemprop="genre">{{ article.category }}</span></a>
+            </dd>
+            <dd class="published hasTooltip" title="" data-original-title="Published: ">
+                <i class="fal fa-calendar"></i>
+                <time datetime="{{ article.createdAt | date("c") }}" itemprop="datePublished">
+                    {{ article.createdAt | date("m/d/Y") }}
+                    <meta itemprop="datePublished" content="{{ article.createdAt | date("c") }}">
+                    <meta itemprop="dateModified" content="{{ article.updatedAt | date("c") }}">
+                </time>
+            </dd>
+            {% if show_hits is defined and show_hits %}
+                <dd class="hits">
+                    <i class="fal fa-eye"></i>
+                    <meta itemprop="interactionCount" content="UserPageVisits:670">
+                    Hits: 70
+                </dd>
+            {% endif %}
+        </dl>
+    </div>
+{% endif %}

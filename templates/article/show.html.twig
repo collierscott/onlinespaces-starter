@@ -1,0 +1,47 @@
+{% extends '_layouts/default/default.html.twig' %}
+{% set article = context['content'] %}
+
+{% block title %}{{ onl_render_title(settings, page) }} - {{ article.title }}{% endblock %}
+
+{% block body %}
+     <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="d-flex align-items-center mt-auto">
+                     {% include '_layouts/components/_page-title.html.twig'
+                         with {
+                             'title': article.title,
+                             'show_article_info': true,
+                             'article': article,
+                             'show_hits': true
+                        }
+                     %}
+                    <div class="ml-2 mr-auto text-muted">
+                        <a href="javascript:void(0)" class="icon d-inline-block ml-3">
+                            <i class="fal fa-heart mr-1"> </i>
+                        </a>
+                    </div>
+                    <div class="sharethis-inline-share-buttons"></div>
+                </div>
+                {#<div class="social-wrapper">#}
+                    {#{% include '_layouts/components/social/_social-buttons.html.twig' %}#}
+                {#</div>#}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9">
+                {% if article.content %}
+                    <p>{{ article.content | raw }}</p>
+                {% endif %}
+            </div>
+            <div class="col-lg-3 order-lg-1 mb-4">
+                <div class="mb-2">
+                    <iframe
+                            src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=12&l=ur1&category=amazonhomepage&f=ifr&linkID=24a65a219b0af8578cd848946077a909&t={{ amazon_affiliate_id }}&tracking_id={{ amazon_affiliate_id }}"
+                            width="300" height="250" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,118 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+<ul class="nav nav-tabs" id="settingsTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link" id="metadata-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Global</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="metadata-tab" data-toggle="tab" href="#metadata" role="tab" aria-controls="metadata" aria-selected="false">Metadata</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="social-tab" data-toggle="tab" href="#social" role="tab" aria-controls="social" aria-selected="false">Social</a>
+    </li>
+</ul>
+<div class="tab-content" id="settingsTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_row(form.siteName, {
+                    'label': 'Site Name',
+                    'placeholder': "Please enter the name of the site"
+                }) }}
+                {{ form_row(form.isSiteOffline, {
+                    'label': 'Site Offline',
+                }) }}
+                {{ form_row(form.accessLevel, {
+                    'label': 'Default Access Level',
+                }) }}
+                {{ form_row(form.listLimit, {
+                    'label': 'Default List Limit',
+                }) }}
+                {{ form_row(form.robots, {
+                    'label': 'Robots',
+                    'placeholder': 'Please enter meta robots.',
+                }) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(form.contentRights, {
+                    'label': 'Content Rights',
+                }) }}
+                {{ form_row(form.tempFolder, {
+                    'label': 'Temp Folder',
+                }) }}
+                {{ form_row(form.serverTimeZone, {
+                    'label': 'Server Timezone',
+                }) }}
+                {{  form_row(form.layout, {
+                    'label': 'Default Page Layout',
+                    'placeholder': 'The default layout of the page.'
+                }) }}
+                {{ form_row(form.language, {
+                    'label': 'Site Language',
+                    'placeholder': 'Please enter language.',
+                }) }}
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="metadata" role="tabpanel" aria-labelledby="metadata-tab">
+        {{ form_row(form.description, {
+            'label': 'Description',
+            'placeholder': 'Please enter a meta description (<=155).',
+        }) }}
+        {{ form_row(form.contentType, {
+            'label': 'Content Type',
+            'placeholder': 'Please enter a meta content type.',
+        }) }}
+        {{ form_row(form.keywords, {
+            'label': 'Keywords',
+            'placeholder': 'Please enter meta keywords.',
+        }) }}
+    </div>
+    <div class="tab-pane fade" id="social" role="tabpanel" aria-labelledby="social-tab">
+        <div class="row">
+            <div class="col-md-4">
+                {{ form_row(form.facebookAppId, {
+                    'label': 'Facebook App Id',
+                    'placeholder': 'Please enter the Facebook application id for this site.',
+                }) }}
+                {{ form_row(form.facebookType, {
+                    'label': 'Facebook Type',
+                    'placeholder': 'Please enter the Facebook application type e.g. website.',
+                }) }}
+                {{ form_row(form.facebookTtl, {
+                    'label': 'Facebook TTL',
+                    'placeholder': 'Please enter the Facebook TTL',
+                }) }}
+                {{ form_row(form.facebookAdmins, {
+                    'label': 'Facebook Admins',
+                    'placeholder': 'Please enter the Facebook Admins',
+                }) }}
+                {{ form_row(form.facebookProfileId, {
+                    'label': 'Facebook Profile Id',
+                    'placeholder': 'Please enter the Facebook Profile Id',
+                }) }}
+                {{ form_row(form.facebookPage, {
+                    'label': 'Facebook Pages',
+                    'placeholder': 'Please enter the Facebook Page',
+                }) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_row(form.twitterUsername, {
+                    'label': 'Twitter Username',
+                    'placeholder': 'Please enter the Twitter username',
+                }) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_row(form.googleId, {
+                    'label': 'Google Analytics Id',
+                    'placeholder': 'Please enter the Google Analytics Id',
+                }) }}
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<button type="submit" class="btn btn-primary" formnovalidate>Save</button>
+<a href="{{ path('admin_article_list') }}" class="btn btn-primary">Cancel</a>
+{{ form_end(form) }}

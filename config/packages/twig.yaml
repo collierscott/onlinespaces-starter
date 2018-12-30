@@ -2,3 +2,9 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes: ['bootstrap_4_layout.html.twig']
+    globals:
+        amazon_affiliate_id: '%env(AMAZON_AFFILIATE_ID)%'
+        google_analytics_id: '%env(GOOGLE_ANALYTICS_ID)%'
+        facebook_pixel_id: '%env(FACEBOOK_PIXEL_ID)%'
+        share_this_property: '%env(SHARE_THIS_PROPERTY)%'
