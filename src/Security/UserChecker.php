@@ -10,7 +10,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserChecker implements UserCheckerInterface
 {
-
     /**
      * Checks the user account before authentication.
      *

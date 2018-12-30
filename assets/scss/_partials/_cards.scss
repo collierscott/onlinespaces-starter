@@ -415,3 +415,9 @@ Card alert
   letter-spacing: .05em;
   margin: 0 0 .5rem;
 }
+
+.card-image-wrapper {
+  max-height: 250px;
+  overflow: hidden;
+  max-width: 250px;
+}

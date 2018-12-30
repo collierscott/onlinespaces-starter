@@ -41,6 +41,8 @@ class ArticleController extends PageController
         }
 
         $context['content'] = $article;
+        $image = $article->getCoverImage() ? $article->getCoverImage() : $this->settings->getDefaultImage();
+        $this->settings->setDefaultImage(str_replace('\\', '/', $image));
         $context['settings'] = $this->settings;
 
         return $this->render('article/show.html.twig', [

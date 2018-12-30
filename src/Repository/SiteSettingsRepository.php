@@ -19,6 +19,17 @@ class SiteSettingsRepository extends ServiceEntityRepository
         parent::__construct($registry, SiteSettings::class);
     }
 
+    public function findOneByMostRecentSettings()
+    {
+        $result = $this->createQueryBuilder('s')
+            ->orderBy('s.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+            ;
+        return $result[0];
+    }
+
     // /**
     //  * @return SiteSettings[] Returns an array of SiteSettings objects
     //  */

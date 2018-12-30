@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use App\Entity\AvatarImage;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -19,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message="This email is already registered."
  * )
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     use TimestampableEntity;
 
@@ -33,6 +35,10 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message="Please enter an username")
+     * @Assert\Length(
+     *      min = 3,
+     *      minMessage = "Your username must be at least {{ limit }} characters long",
+     * )
      */
     private $username;
 
@@ -94,6 +100,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author")
      */
     private $articles;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\AvatarImage", cascade={"persist", "remove"})
+     */
+    private $avatar;
 
     /**
      * User constructor.
@@ -325,6 +336,63 @@ class User implements UserInterface
                 $article->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * String representation of object
+     * @link https://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->email,
+            $this->isEnabled,
+            $this->isConfirmed,
+            $this->isDeleted,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /**
+     * Constructs the object
+     * @link https://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->email,
+            $this->isEnabled,
+            $this->isConfirmed,
+            $this->isDeleted,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized, array('allowed_classes' => false));
+    }
+
+    public function getAvatar(): ?AvatarImage
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?AvatarImage $avatar): self
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

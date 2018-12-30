@@ -2,31 +2,31 @@
 
 {% block title %}Welcome to Onlinespaces!{% endblock %}
 
-{% block content %}
+{% block body %}
     <div class="container">
         <div class="row row-cards row-deck">
 
             {% for article in context['content'] | slice(0, 4) %}
                 <div class="col-sm-6 col-xl-3">
-                    {% include '_components/_cards/_post_single.html.twig' with { 'article': article, 'type': 'image', 'truncate': 200} %}
+                    {% include '_layouts/components/cards/_post_single.html.twig' with { 'article': article, 'type': 'image', 'truncate': 200} %}
                 </div>
             {% endfor %}
 
             {% for article in context['content'] | slice(3, 4) %}
                 <div class="col-lg-4">
-                    {% include '_components/_cards/_post_single.html.twig' with { 'article': article, 'id': article.id, 'truncate': 200 } %}
+                    {% include '_layouts/components/cards/_post_single.html.twig' with { 'article': article, 'id': article.id, 'truncate': 200 } %}
                 </div>
             {% endfor %}
 
             {% for article in context['content'] | slice(0, 2) %}
                 <div class="col-lg-6">
-                    {% include '_components/_cards/_post_single.html.twig' with { 'article': article, 'type': 'aside', 'truncate': 200} %}
+                    {% include '_layouts/components/cards/_post_single.html.twig' with { 'article': article, 'type': 'aside', 'truncate': 200} %}
                 </div>
             {% endfor %}
 
             {% for article in context['content'] | slice(2, 4) %}
                 <div class="col-lg-6">
-                    {% include '_components/_cards/_post_single.html.twig' with { 'article': article, 'type': 'aside', 'truncate': 200} %}
+                    {% include '_layouts/components/cards/_post_single.html.twig' with { 'article': article, 'type': 'aside', 'truncate': 200} %}
                 </div>
             {% endfor %}
         </div>

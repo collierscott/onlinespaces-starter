@@ -119,6 +119,12 @@ class SiteSettings
     private $facebookAppId;
 
     /**
+     * @var string|null
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $facebookPixelId;
+
+    /**
      * Find out the type of your object in the Action Type section of App Dashboard. Select the object and find its
      * og:type under Advanced. Once an object is published in a story its type can't be changed.
      *
@@ -178,6 +184,12 @@ class SiteSettings
      */
     private $layout;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    private $defaultImage;
+
     public function __construct()
     {
         $this->isSiteOffline = false;
@@ -191,6 +203,7 @@ class SiteSettings
         $this->facebookType = "website";
         $this->facebookTtl = 604800;
         $this->layout = "default";
+        $this->defaultImage = getenv('DEFAULT_IMAGE') ? getenv('DEFAULT_IMAGE') : 'uploads/default_image.jpg';
     }
 
     public function getId(): ?int
@@ -354,6 +367,24 @@ class SiteSettings
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getFacebookPixelId(): ?string
+    {
+        return $this->facebookPixelId;
+    }
+
+    /**
+     * @param string|null $facebookPixelId
+     * @return SiteSettings
+     */
+    public function setFacebookPixelId(?string $facebookPixelId): SiteSettings
+    {
+        $this->facebookPixelId = $facebookPixelId;
+        return $this;
+    }
+
     public function getFacebookType(): ?string
     {
         return $this->facebookType;
@@ -457,5 +488,23 @@ class SiteSettings
         }
 
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultImage(): ?string
+    {
+        return $this->defaultImage;
+    }
+
+    /**
+     * @param string $defaultImage
+     * @return SiteSettings
+     */
+    public function setDefaultImage(string $defaultImage): SiteSettings
+    {
+        $this->defaultImage = $defaultImage;
+        return $this;
     }
 }

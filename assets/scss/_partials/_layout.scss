@@ -25,9 +25,9 @@
 }
 
 .page-header {
-  display: flex;
-  align-items: center;
-  margin: 1.5rem 0 1.5rem;
+  //display: flex;
+  //align-items: center;
+  margin: 1rem 0 .5rem;
   flex-wrap: wrap;
 }
 
@@ -46,7 +46,7 @@
 .page-subtitle {
   font-size: px2rem(13px);
   color: $text-muted-dark;
-  margin-left: 2rem;
+  //margin-left: 2rem;
 
   a {
     color: inherit;
@@ -87,4 +87,10 @@
   &:first-child {
     margin-top: 0;
   }
+}
+
+.social-wrapper {
+  margin-top: 10px;
+  clear: left;
+  margin-bottom: 10px;
 }

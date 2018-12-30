@@ -1,0 +1,28 @@
+<div class="page-header">
+    <h1 class="page-title">
+        {% if icon is defined and icon %}
+            <i class="{{ icon }} page-title-icon"></i>
+        {% endif %}
+
+        {{ title }}
+    </h1>
+
+    {% if subtitle is defined and subtitle %}
+        <div class="page-subtitle">{{ subtitle }}</div>
+    {% endif %}
+
+    {% if show_article_info is defined and show_article_info %}
+        {% include '_layouts/components/article/_article_info.html.twig' with { 'article': article, 'show_hits': true } %}
+    {% endif %}
+
+    {#{% if include.options %}#}
+        {#<div class="page-options">{{ include.options }}</div>#}
+    {#{% endif %}#}
+
+    {#{% comment %}#}
+        {#<nav class="page-breadcrumb breadcrumb">#}
+            {#<a class="breadcrumb-item" href="javascript:void(0)">Library</a>#}
+            {#<span class="breadcrumb-item active">Cards</span>#}
+        {#</nav>#}
+    {#{% endcomment %}#}
+</div>
