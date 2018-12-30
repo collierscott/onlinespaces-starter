@@ -7,3 +7,4 @@ twig:
         amazon_affiliate_id: '%env(AMAZON_AFFILIATE_ID)%'
         google_analytics_id: '%env(GOOGLE_ANALYTICS_ID)%'
         facebook_pixel_id: '%env(FACEBOOK_PIXEL_ID)%'
+        share_this_property: '%env(SHARE_THIS_PROPERTY)%'
