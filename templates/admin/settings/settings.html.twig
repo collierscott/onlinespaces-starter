@@ -1,0 +1,18 @@
+{% extends '_layouts/default/default.html.twig' %}
+{%  set crumbs = [
+    {title: 'Admin Home', path: 'admin_home'},
+    {title: 'Settings', active: true}
+]
+%}
+{% block breadcrumb %}
+    {% include '_layouts/components/_breadcrumb.html.twig' with {'crumbs': crumbs } %}
+{% endblock %}
+{% block title %}Site Settings!{% endblock %}
+
+{% block body %}
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a href="{{ path('admin_site_settings') }}">Site Settings</a>
+        </li>
+    </ul>
+{% endblock %}

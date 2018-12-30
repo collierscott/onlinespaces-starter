@@ -1,0 +1,59 @@
+{% extends '_layouts/default/default.html.twig' %}
+{% set categories = context['content'] %}
+{%  set crumbs = [
+    {title: 'Admin Home', path: 'admin_home'},
+    {title: 'Categories', active: true}
+]
+%}
+{% block breadcrumb %}
+    {% include '_layouts/components/_breadcrumb.html.twig' with {'crumbs': crumbs } %}
+{% endblock %}
+{% block title %}Categories{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Categories</h1>
+        <a href="{{ path('admin_categories_new') }}" class="btn btn-primary">Add New Category</a>
+        {% if categories is defined and categories is not empty %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        Category
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for category in categories %}
+                    <tr>
+                        <td>{{ category.title }}</td>
+                        <td>
+                            <a href="{{ path('admin_categories_edit', {
+                                id: category.id
+                            }) }}">
+                                <span class="fa fa-pencil"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ path('admin_categories_delete', {
+                                id: category.id
+                            }) }}">
+                                <span class="fa fa-trash-alt text-danger"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <span class="fa fa-{{ category.isPublished ? 'check' : 'times' }} {{ category.isPublished ? 'text-success' : '' }}"></span>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h2>No categories found.</h2>
+        {% endif %}
+    </div>
+{% endblock %}

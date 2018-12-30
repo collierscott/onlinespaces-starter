@@ -1,0 +1,19 @@
+<div class="container my-4">
+    <div class="row">
+        <div class="col-12">
+            <nav class="" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    {% for crumb in crumbs %}
+                        <li class="breadcrumb breadcrumb-item {{ crumb.active is defined ? 'active' : '' }}">
+                            {% if crumb.path is defined %}
+                                <a href="{{ path(crumb.path) }}">{{ crumb.title }}</a>
+                            {% else %}
+                                {{ crumb.title }}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="header py-4">
+    <div class="container">
+        <div class="d-flex">
+            <a class="header-brand" href="{{ path('home_page') }}">
+                <img src="{{ asset('build/images/onlinespaces__logo--44x44.png') }}" class="header-brand-img" alt="logo">
+            </a>
+            <div class="d-flex order-lg-2 ml-auto">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <div class="dropdown">
+                        <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+                            <span class="avatar" style="background-image: url({{ asset('build/images/user.png') }})"></span>
+                            <span class="ml-2 d-none d-lg-block">
+                                <span class="text-default">{{ app.user.username }}</span>
+                                {#<small class="text-muted d-block mt-1">Administrator</small>#}
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                            <a class="dropdown-item" href="{{ path('user_profile', {'id': app.user.id}) }}">
+                                <i class="dropdown-icon fal fa-user"> </i>Profile
+                            </a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="dropdown-item" href="{{ path('admin_home') }}">
+                                    <i class="dropdown-icon fal fa-user-secret"> </i> Admin
+                                </a>
+                            {% endif %}
+                            {#<a class="dropdown-item" href="#">#}
+                                {#<i class="dropdown-icon fe fe-settings"></i> Settings#}
+                            {#</a>#}
+                            {#<a class="dropdown-item" href="#">#}
+                                {#<span class="float-right"><span class="badge badge-primary">6</span></span>#}
+                                {#<i class="dropdown-icon fe fe-mail"></i> Inbox#}
+                            {#</a>#}
+                            {#<a class="dropdown-item" href="#">#}
+                                {#<i class="dropdown-icon fe fe-send"></i> Message#}
+                            {#</a>#}
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('help') }}">
+                                <i class="dropdown-icon fal fa-question-circle"> </i> Need help?
+                            </a>
+                            <a class="dropdown-item" href="{{ path('form_logout') }}">
+                                <i class="dropdown-icon fal fa-sign-out-alt"> </i> Sign out
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="nav-item d-none d-md-flex">
+                        <a href="{{ path('form_login') }}" class="btn btn-sm btn-outline-primary">Login</a>
+                    </div>
+                    <div class="nav-item d-none d-md-flex">
+                        <a href="{{ path('form_register') }}" class="btn btn-sm btn-outline-primary">Register</a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <a href="#" class="navbar-toggler header-toggler d-lg-none ml-3 ml-lg-0 btn btn-white" type="button" data-toggle="collapse" data-target="#headerMenuCollapse">
+                  <span class="navbar-toggler-icon"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+    <div class="container">
+        <div class="row align-items-center">
+            {#<div class="col-lg-3 ml-auto">#}
+                {#<form class="input-icon my-3 my-lg-0">#}
+                    {#<input type="search" class="form-control header-search" placeholder="Search&hellip;" tabindex="1">#}
+                    {#<div class="input-icon-addon">#}
+                        {#<i class="fe fe-search"></i>#}
+                    {#</div>#}
+                {#</form>#}
+            {#</div>#}
+            <div class="col-lg order-lg-first">
+                {% include '_layouts/default/_menu.html.twig' %}
+            </div>
+        </div>
+    </div>
+</div>

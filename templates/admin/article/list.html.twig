@@ -1,0 +1,62 @@
+{% extends '_layouts/default/default.html.twig' %}
+{%  set crumbs = [
+    {title: 'Admin Home', path: 'admin_home'},
+    {title: 'Articles', active: true}
+]
+%}
+{% block breadcrumb %}
+    {% include '_layouts/components/_breadcrumb.html.twig' with {'crumbs': crumbs } %}
+{% endblock %}
+{% block title %}Articles{% endblock %}
+{% set articles = context['content'] %}
+{% block body %}
+    <div class="container">
+        <h1>Articles</h1>
+        <a href="{{ path('admin_article_new') }}" class="btn btn-primary">Add New Article</a>
+        {% if articles is defined and articles is not empty %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Author
+                        </th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for article in articles %}
+                        <tr>
+                            <td>{{ article.title }}</td>
+                            <td>{{ article.author.username }}</td>
+                            <td>
+                                <a href="{{ path('admin_article_edit', {
+                                    id: article.id
+                                }) }}">
+                                    <span class="fa fa-pencil"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ path('admin_article_delete', {
+                                    id: article.id
+                                }) }}">
+                                    <span class="fa fa-trash-alt text-danger"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <span class="fa fa-{{ article.isPublished ? 'check' : 'times' }} {{ article.isPublished ? 'text-success' : '' }}"></span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h2>No articles found.</h2>
+        {% endif %}
+    </div>
+{% endblock %}

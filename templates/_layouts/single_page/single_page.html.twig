@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block layout %}
+    <div class="flex-fill">
+        {% include '_layouts/default/_header.html.twig' %}
+        <div class="page-single">
+            <div class="container">
+                <div class="row">
+                     {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include '_layouts/default/_subfooter.html.twig' %}
+    {% include '_layouts/default/_footer.html.twig' %}
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends '_layouts/single_page/single_page.html.twig' %}
+
+{% block title %}Register!{% endblock %}
+
+{% block body %}
+<div class="col col-login mx-auto">
+    <div class="text-center mb-6 mt-3">
+        {{ form_start(form, {
+            'attr': {'class': 'card'}
+        }) }}
+            <div class="card-body p-6">
+                <div class="card-title">Create new account</div>
+                {{ form_row(form.username) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.plainPassword) }}
+                {{ form_row(form.agreeTerms) }}
+                <span><a href="terms.html">Terms and Policies</a></span>
+                <div class="form-footer">
+                    <button type="submit" class="btn btn-primary btn-block">Create new account</button>
+                </div>
+            </div>
+        {{ form_end(form) }}
+        <div class="text-center text-muted">
+            Already have account? <a href="{{ path('form_login') }}">Sign in</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
