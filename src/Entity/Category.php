@@ -186,4 +186,9 @@ class Category implements NodeTypeInterface
         $this->isPublished = $isPublished;
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 }
