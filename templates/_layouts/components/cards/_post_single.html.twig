@@ -10,7 +10,7 @@
     {% if type == 'image' %}
         <div class="card-image-wrapper">
             <a href="{{ path('article_show', {'slug': article.slug})  }}">
-                <img class="card-img-top img-responsive" src="{{ article.coverImage }}" alt="{{ article.title | escape}}">
+                <img class="card-img-top img-fluid" src="{{ article.coverImage }}" alt="{{ article.title | escape}}">
             </a>
         </div>
     {% endif %}
