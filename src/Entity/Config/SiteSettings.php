@@ -57,6 +57,11 @@ class SiteSettings
     private $siteName;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $siteEmail;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $isSiteOffline;
@@ -192,6 +197,7 @@ class SiteSettings
 
     public function __construct()
     {
+        $this->siteEmail = 'test@test.com';
         $this->isSiteOffline = false;
         $this->accessLevel = 1;
         $this->listLimit = 25;
@@ -220,6 +226,24 @@ class SiteSettings
     {
         $this->siteName = $siteName;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSiteEmail()
+    {
+        return $this->siteEmail;
+    }
+
+    /**
+     * @param mixed $siteEmail
+     * @return SiteSettings
+     */
+    public function setSiteEmail($siteEmail)
+    {
+        $this->siteEmail = $siteEmail;
         return $this;
     }
 
