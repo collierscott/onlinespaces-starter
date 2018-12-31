@@ -16,6 +16,7 @@ class SettingsType extends AbstractType
     {
         $builder
             ->add('siteName')
+            ->add('siteEmail')
             ->add('isSiteOffline', ChoiceType::class, [
                 'choices' => [
                     'Yes' => true,
