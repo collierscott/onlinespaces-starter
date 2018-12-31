@@ -94,6 +94,18 @@ class SiteSettingsFixtures extends BaseFixture
         );
         $this->settings->setGoogleId($setting);
 
+        $setting = $this->getValue(
+            'defaultImage',
+            'DEFAULT_IMAGE'
+        );
+        $this->settings->setDefaultImage($setting);
+
+        $setting = $this->getValue(
+            'siteEmail',
+            'SITE_EMAIL'
+        );
+        $this->settings->setSiteEmail($setting);
+
         $manager->persist($this->settings);
         $manager->flush();
     }
