@@ -12,8 +12,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 class ArticleFixtures extends BaseFixture implements DependentFixtureInterface
 {
     private static $articleImages = [
-        'uploads\images\296231_264895630198463_364530757_n.jpg',
-        'uploads\images\corgi_smiling.png',
+        'build\images\default_article_image.png',
+        'build\images\default_image.jpg',
     ];
 
     protected function loadData(ObjectManager $manager)
