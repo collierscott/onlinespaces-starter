@@ -14,7 +14,7 @@
                 {{ form_row(form.email) }}
                 {{ form_row(form.plainPassword) }}
                 {{ form_row(form.agreeTerms) }}
-                <span><a href="terms.html">Terms and Policies</a></span>
+                <span><a href="{{ path('policy_terms') }}">Terms and Policies</a></span>
                 <div class="form-footer">
                     <button type="submit" class="btn btn-primary btn-block">Create new account</button>
                 </div>
