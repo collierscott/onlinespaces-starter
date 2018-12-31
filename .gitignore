@@ -28,3 +28,4 @@ yarn-error.log
 /public/favicon.ico
 /public/uploads
 /public/vendors
+.npmrc
